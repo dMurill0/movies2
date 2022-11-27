@@ -34,7 +34,7 @@ const NavBar = () => {
 const [type, setTypa] = useState(0);
 
   return (
-    <div className="h-[100px] w-screen flex justify-between bg-gradient-to-b from-black to-slate-800 dark:bg-gradient-to-b dark:from-purple-500 dark:to-pink-500">
+    <div className="h-[100px] w-screen flex justify-between bg-gradient-to-b from-black to-slate-800 dark:bg-gradient-to-b dark:from-purple-500 dark:to-pink-500 border-2 border-b-slate-300 dark:border-b-slate-800">
       <div className="flex w-fit items-center h-fit justify-start p-3  md:space-x3 lg:space-x-5 text-white dark:text-black mt-8 ml-4">
         <Link
           to="/"

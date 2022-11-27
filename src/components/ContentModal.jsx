@@ -16,14 +16,23 @@ const style = {
   p: 4,
 };
 
-export default function ContentModal() {
+export default function ContentModal({
+  children,
+  id,
+  title,
+  overview,
+  vote,
+  language,
+}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button type="button" onClick={handleOpen}>
+        {children}
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}

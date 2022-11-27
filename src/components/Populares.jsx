@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { FaMoon } from "react-icons/fa";
 import { BsFillSunFill, BsSearch } from "react-icons/bs";
-import { Badge } from "@mui/material";
+import { Badge, Button } from "@mui/material";
 import CustomPagination from "./layout/CustomPagination";
+import Title from "./layout/Title";
+import ContentModal from "./ContentModal";
 const Populares = () => {
   const API =
     "https://api.themoviedb.org/3/trending/all/day?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES";
@@ -16,59 +18,39 @@ const Populares = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  const [theme, setTheme] = useState("light");
   const [page, setPage] = useState();
 
-  useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [theme]);
-
-  const handleSwitch = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
-
-  const cursorLight = (
-    <div>
-      <FaMoon className="text-white hidden" />
-      <BsFillSunFill className="text-orange-400" />
-    </div>
-  );
-  const cursorDark = (
-    <div>
-      <FaMoon className="text-white " />
-      <BsFillSunFill className="text-black hidden" />
-    </div>
-  );
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
 
   return (
     <div className="max-w-2/3 w-screen h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
-      <div className="flex w-full justify-between items-center">
-        <button
-          onClick={handleSwitch}
-          className="text-black bg-yellow-100 dark:bg-slate-700 dark:text-white border border-red-500 py-2 px-4 rounded-full m-4 w-12"
-        >
-          {theme === "dark" ? cursorDark : cursorLight}
-        </button>
-        <h1 className="mx-auto text-6xl font-oswald font-extrabold text-center uppercase dark:text-pink-500 text-orange-500">
-          Popular
-        </h1>
-      </div>
+      <Title titulo="Populares" />
       {content.length > 0 ? (
         <div className="flex flex-wrap mt-10 ml-6 justify-around  ">
           {content.map((popular) => (
             // CAJA
-            <a href="">
-              {" "}
+
+            <Button open={open} onClick={handleOpen}>
               <div
                 key={popular.id}
                 className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
               >
+                {/* <ContentModal children
+                  id={popular.id}
+                  title={popular.title || popular.name}
+                  overview={popular.overview}
+                  vote={popular.vote_average}
+                  language={popular.original_language}
+                /> */}
                 <Badge
-                  color={popular.vote_average > 7 ? "success" : (popular.vote_average >= 5 ? "primary" : "error")}
+                  color={
+                    popular.vote_average > 7
+                      ? "success"
+                      : popular.vote_average >= 5
+                      ? "primary"
+                      : "error"
+                  }
                   className="flex justify-end"
                   badgeContent={popular.vote_average.toFixed(1)}
                 />
@@ -107,7 +89,7 @@ const Populares = () => {
                   </div>
                 </div>
               </div>
-            </a>
+            </Button>
           ))}
           <CustomPagination />
         </div>
