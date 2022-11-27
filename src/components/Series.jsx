@@ -62,27 +62,27 @@ const Series = () => {
   );
 
   return (
-    <div className="max-w-2/3 w-screen h-fit p-5 flex-col flex-wrap justify-center bg-slate-500 ">
-      <div className="flex w-full justify-between items-center">
+    <div className="max-w-2/3 w-screen h-fit p-5 flex flex-col flex-wrap bg-slate-500 ">
+      <div className="flex w-full justify-between ">
         <button
           onClick={handleSwitch}
           className="text-black bg-yellow-100 dark:bg-slate-700 dark:text-white border border-red-500 py-2 px-4 rounded-full m-4 w-12"
         >
           {theme === "dark" ? cursorDark : cursorLight}
         </button>
-        <h1 className="mx-auto text-4xl font-oswald font-bold text-center uppercase dark:text-pink-500 text-orange-500">
+        <h1 className="mx-auto text-6xl font-oswald font-extrabold text-center uppercase dark:text-pink-500 text-orange-500">
           Series
         </h1>
       </div>
       {content.length > 0 ? (
-        <div className="flex flex-wrap  justify-around space-y-2  mt-12 space-x-2">
+        <div className="flex flex-wrap justify-around mt-12 ">
           {content.map((popular) => (
             // CAJA
             <a href="">
               {" "}
               <div
                 key={popular.id}
-                className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 rounded-lg relative hover:bg-black dark:hover:text-white dark:text-black"
+                className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
               >
                 <Badge
                   color={popular.vote_average > 7 ? "success" : (popular.vote_average >= 5 ? "primary" : "error")}
@@ -100,7 +100,7 @@ const Series = () => {
                   className="rounded-t-lg hover:scale-105 h-60"
                 />
                 <div className="flex-col space-y-4">
-                  <h1 className="text-md font-oswald text-center">
+                  <h1 className="text-md font-oswald text-center truncate">
                     {popular.name}
                   </h1>
                   <div className="flex justify-between items-end">

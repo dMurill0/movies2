@@ -5,7 +5,7 @@ import { Badge } from "@mui/material";
 import CustomPagination from "./layout/CustomPagination";
 const Populares = () => {
   const API =
-    "https://api.themoviedb.org/3/trending/all/day?api_key=1976c380dd1c386feb7c2778eef34284";
+    "https://api.themoviedb.org/3/trending/all/day?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES";
   const API_IMG = "https://image.tmdb.org/t/p/w300/";
   const [content, setContent] = useState([]);
   const noImage = "/public/images/noImagen.jpg";
@@ -53,19 +53,19 @@ const Populares = () => {
         >
           {theme === "dark" ? cursorDark : cursorLight}
         </button>
-        <h1 className="mx-auto text-4xl font-oswald font-bold text-center uppercase dark:text-pink-500 text-orange-500">
+        <h1 className="mx-auto text-6xl font-oswald font-extrabold text-center uppercase dark:text-pink-500 text-orange-500">
           Popular
         </h1>
       </div>
       {content.length > 0 ? (
-        <div className="flex flex-wrap mt-10 ml-6 justify-around space-y-2  ">
+        <div className="flex flex-wrap mt-10 ml-6 justify-around  ">
           {content.map((popular) => (
             // CAJA
             <a href="">
               {" "}
               <div
                 key={popular.id}
-                className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 rounded-lg relative hover:bg-black dark:hover:text-white dark:text-black"
+                className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
               >
                 <Badge
                   color={popular.vote_average > 7 ? "success" : (popular.vote_average >= 5 ? "primary" : "error")}
@@ -79,18 +79,18 @@ const Populares = () => {
                       : noImage
                   }
                   alt={popular.title || popular.name}
-                  className="rounded-t-lg hover:scale-105"
+                  className="rounded-t-lg hover:scale-105 "
                 />
                 <div className="flex-col space-y-4">
                   {popular.title != null ? (
-                    <div className="">
+                    <div className="truncate">
                       <h1 className="text-md font-oswald text-center">
                         {popular.title}
                       </h1>
                       <h1 className="hidden">{popular.name}</h1>
                     </div>
                   ) : (
-                    <div>
+                    <div className="w-lg overflow-x-hidden">
                       <h1 className="hidden">{popular.title}</h1>
                       <h1 className="text-md font-oswald text-center">
                         {popular.name}
@@ -99,7 +99,7 @@ const Populares = () => {
                   )}
                   <div className="flex justify-between items-end">
                     <span className="text-xs">
-                      {popular.media_type === "tv" ? "Serie" : "Peli"}
+                      {popular.media_type === "tv" ? "Serie" : "Película"}
                     </span>
                     <p className="text-xs">
                       {popular.first_air_date || popular.release_date}

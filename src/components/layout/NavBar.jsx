@@ -34,8 +34,8 @@ const NavBar = () => {
 const [type, setTypa] = useState(0);
 
   return (
-    <div className="h-full w-screen flex justify-between items-center  bg-gradient-to-b from-black to-slate-800 dark:bg-gradient-to-b dark:from-purple-500 dark:to-pink-500">
-      <div className="flex h-fit justify-start py-3 w-screen md:space-x3 lg:space-x-5 text-white dark:text-black mt-8 ml-4">
+    <div className="h-[100px] w-screen flex justify-between bg-gradient-to-b from-black to-slate-800 dark:bg-gradient-to-b dark:from-purple-500 dark:to-pink-500">
+      <div className="flex w-fit items-center h-fit justify-start p-3  md:space-x3 lg:space-x-5 text-white dark:text-black mt-8 ml-4">
         <Link
           to="/"
           className="font-oswald font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500"
@@ -55,8 +55,8 @@ const [type, setTypa] = useState(0);
           <SiHbo className="text-2xl text-white hover:text-orange-500 dark:hover:text-white dark:text-black mr-4" />
         </Link>
       </div>
-      <div className="flex space-x-2 mr-8 ">
-        <input className="rounded-lg p-1" type="text" name="busqueda" onChange={(e) => setSearchText(e.target.value)} id="text-fetch" placeholder="Busca una peli o serie"/>
+      <div className="flex space-x-2 w-fit mr-8 h-1/3 items-center p-3 mt-8">
+        <input className="rounded-lg p-1 font-oswald text-md mx-2 " type="text" onChange={(e) => setSearchText(e.target.value)} id="text-fetch" placeholder="Busca una peli o serie"/>
       <button className="dark:text-black mr-6 text-xl text-orange-500">
         <BsSearch />
       </button>

@@ -54,19 +54,19 @@ const Pelis = () => {
         >
           {theme === "dark" ? cursorDark : cursorLight}
         </button>
-        <h1 className="mx-auto text-4xl font-oswald font-bold text-center uppercase dark:text-pink-500 text-orange-500">
+        <h1 className="mx-auto text-6xl font-oswald font-extrabold text-center uppercase dark:text-pink-500 text-orange-500">
           Películas
         </h1>
       </div>
       {content.length > 0 ? (
-        <div className="flex flex-wrap mt-10 ml-6 justify-around space-y-2 ">
+        <div className="flex flex-wrap mt-10 ml-6 justify-around  ">
           {content.map((popular) => (
             // CAJA
             <a href="">
-              {" "}
+              
               <div
                 key={popular.id}
-                className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 rounded-lg relative hover:bg-black dark:hover:text-white dark:text-black"
+                className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
               >
                 <Badge
                   color={popular.vote_average > 7 ? "success" : (popular.vote_average >= 5 ? "primary" : "error")}
@@ -84,11 +84,11 @@ const Pelis = () => {
                   className="rounded-t-lg hover:scale-105"
                 />
                 <div className="flex-col space-y-4">
-                  <h1 className="text-md font-oswald text-center">
+                  <h1 className="text-md font-oswald text-center truncate">
                     {popular.title}
                   </h1>
                   <div className="flex justify-between items-end">
-                  <span className="text-xs w-6 h-5">{popular.original_language === "en" ? <img src="/src/images/eng_us.png" alt=""/> : (popular.original_language === "es" ? <img src="/src/images/spa.webp" alt=""/> : (popular.original_language === "zh" ? <img src="/src/images/zh.webp" alt=""/> : (popular.original_language === "pt" ? <img src="/src/images/pt.png" alt=""/> : (popular.original_language === "gr" ? <img src="/src/images/gr.jpg" alt=""/> : <img src="/src/images/eng_us.png" alt=""/>))))}</span>
+                  <span className="text-xs w-6 h-5">{popular.original_language === "en" ? <img src="/src/images/eng_us.png" alt=""/> : (popular.original_language === "es" ? <img src="/src/images/spa.webp" alt=""/> : (popular.original_language === "zh" ? <img src="/src/images/zh.webp" alt=""/> : (popular.original_language === "pt" ? <img src="/src/images/pt.png" alt=""/> : (popular.original_language === "el" ? <img src="/src/images/gr.jpg" alt=""/> : <img src="/src/images/eng_us.png" alt=""/>))))}</span>
                     <p className="text-xs">{popular.release_date}</p>
                   </div>
                 </div>
