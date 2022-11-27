@@ -8,10 +8,10 @@ import Series from "../components/Series";
 
 const MisRutas = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter className="h-fit ">
       <NavBar />
       <Routes>
-        <Route path="/" elemnent={<Populares />} />
+        <Route path="/" element={<Populares />}></Route>
         <Route path="/pelis" element={<Pelis />}></Route>
         <Route path="/series" element={<Series />}></Route>
         <Route

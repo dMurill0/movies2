@@ -6,10 +6,10 @@ import MisRutas from "./router/MisRutas";
 
 function App() {
   return (
-    <div className="h-screen w-screen bg-slate-200 dark:bg-slate-600 flex">
+    <div className=" bg-slate-200 dark:bg-slate-600 flex-col">
       
       <MisRutas />
-      <Populares/>
+     
     </div>
   );
 }
