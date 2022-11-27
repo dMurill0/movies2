@@ -88,7 +88,7 @@ const Pelis = () => {
                     {popular.title}
                   </h1>
                   <div className="flex justify-between items-end">
-                  <span className="text-xs w-6 h-5">{popular.original_language === "en" ? <img src="/src/images/eng_us.png"/> : (popular.original_language === "es" ? <img src="/src/images/spa.webp"/> : (popular.original_language === "zh" ? <img src="/src/images/zh.webp"/> : (popular.original_language === "pt" ? <img src="/src/images/pt.png"/> : (popular.original_language === "gr" ? <img src="/src/images/gr.png"/> : <img src="/src/images/eng_us.png"/>))))}</span>
+                  <span className="text-xs w-6 h-5">{popular.original_language === "en" ? <img src="/src/images/eng_us.png" alt=""/> : (popular.original_language === "es" ? <img src="/src/images/spa.webp" alt=""/> : (popular.original_language === "zh" ? <img src="/src/images/zh.webp" alt=""/> : (popular.original_language === "pt" ? <img src="/src/images/pt.png" alt=""/> : (popular.original_language === "gr" ? <img src="/src/images/gr.jpg" alt=""/> : <img src="/src/images/eng_us.png" alt=""/>))))}</span>
                     <p className="text-xs">{popular.release_date}</p>
                   </div>
                 </div>
