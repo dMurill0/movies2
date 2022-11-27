@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FaMoon } from "react-icons/fa";
 import { BsFillSunFill, BsSearch } from "react-icons/bs";
+import { Badge } from "@mui/material";
+import CustomPagination from "./layout/CustomPagination";
 const Populares = () => {
   const API =
     "https://api.themoviedb.org/3/trending/all/day?api_key=1976c380dd1c386feb7c2778eef34284";
@@ -15,6 +17,8 @@ const Populares = () => {
   }, []);
 
   const [theme, setTheme] = useState("light");
+  const [page, setPage] = useState();
+
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
@@ -52,7 +56,6 @@ const Populares = () => {
         <h1 className="mx-auto text-4xl font-oswald font-bold text-center uppercase dark:text-pink-500 text-orange-500">
           Popular
         </h1>
-        
       </div>
       {content.length > 0 ? (
         <div className="flex flex-wrap mt-10 ml-6 justify-around space-y-2  ">
@@ -62,8 +65,13 @@ const Populares = () => {
               {" "}
               <div
                 key={popular.id}
-                className=" w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 rounded-lg relative hover:bg-black dark:hover:text-white dark:text-black"
+                className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 rounded-lg relative hover:bg-black dark:hover:text-white dark:text-black"
               >
+                <Badge
+                  color={popular.vote_average > 7 ? "success" : (popular.vote_average >= 5 ? "primary" : "error")}
+                  className="flex justify-end"
+                  badgeContent={popular.vote_average.toFixed(1)}
+                />
                 <img
                   src={
                     popular.poster_path !== null
@@ -101,6 +109,7 @@ const Populares = () => {
               </div>
             </a>
           ))}
+          <CustomPagination />
         </div>
       ) : (
         <h2>Sorry !! No Movies Found</h2>

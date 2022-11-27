@@ -30,31 +30,37 @@ const NavBar = () => {
   //     <BsFillSunFill className="text-black hidden" />
   //   </div>
   // );
+
+const [type, setTypa] = useState(0);
+
   return (
-    <div className="h-full w-screen flex justify-between items-center  bg-gradient-to-b from-slate-800 to-slate-500 dark:bg-gradient-to-b dark:from-purple-500 dark:to-pink-500">
-      <div className="flex  h-fit justify-start py-3 w-screen  space-x-5 text-white dark:text-black mt-8 ml-4">
+    <div className="h-full w-screen flex justify-between items-center  bg-gradient-to-b from-black to-slate-800 dark:bg-gradient-to-b dark:from-purple-500 dark:to-pink-500">
+      <div className="flex h-fit justify-start py-3 w-screen md:space-x3 lg:space-x-5 text-white dark:text-black mt-8 ml-4">
         <Link
           to="/"
-          className="font-poppins font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500"
+          className="font-oswald font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500"
         >
-          <FaHome className=" text-2xl text-white dark:text-black mr-4 items-center" />
+          <FaHome className=" text-2xl text-white hover:text-orange-500 dark:hover:text-white dark:text-black mr-4 items-center" />
         </Link>
         <Link
           to="/pelis"
-          className="flex items-center space-x-4 font-poppins font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500"
+          className="flex items-center space-x-4 font-oswald font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500"
         >
-          <HiFilm className="text-2xl text-white dark:text-black mr-4" />
+          <HiFilm className="text-2xl text-white hover:text-orange-500 dark:hover:text-white dark:text-black mr-4" />
         </Link>
         <Link
           to="/series"
-          className="flex items-center space-x-4 font-poppins font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500"
+          className="flex items-center space-x-4 font-oswald font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500"
         >
-          <SiHbo className="text-2xl text-white dark:text-black mr-4" />
+          <SiHbo className="text-2xl text-white hover:text-orange-500 dark:hover:text-white dark:text-black mr-4" />
         </Link>
       </div>
+      <div className="flex space-x-2 mr-8 ">
+        <input className="rounded-lg p-1" type="text" name="busqueda" onChange={(e) => setSearchText(e.target.value)} id="text-fetch" placeholder="Busca una peli o serie"/>
       <button className="dark:text-black mr-6 text-xl text-orange-500">
         <BsSearch />
       </button>
+      </div>
     </div>
   );
 };

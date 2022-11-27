@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaMoon } from "react-icons/fa";
-import { BsFillSunFill,BsSearch } from "react-icons/bs";
+import { BsFillSunFill, BsSearch } from "react-icons/bs";
+import { Badge } from "@mui/material";
 const API_URL =
   "https://api.themoviedb.org/3/movie/popular?api_key=1976c380dd1c386feb7c2778eef34284&language=es&ES";
 const API_IMG = "https://image.tmdb.org/t/p/w300/";
@@ -17,7 +18,6 @@ const Pelis = () => {
   useEffect(() => {
     fetchPelis();
   }, []);
-
 
   const [theme, setTheme] = useState("light");
   useEffect(() => {
@@ -44,19 +44,19 @@ const Pelis = () => {
       <BsFillSunFill className="text-black hidden" />
     </div>
   );
+
   return (
     <div className="w-screen h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
       <div className="flex w-full justify-between items-center">
-      <button
-        onClick={handleSwitch}
-        className="text-black bg-yellow-100 dark:bg-slate-700 dark:text-white border border-red-500 py-2 px-4 rounded-full m-4 w-12"
-      >
-        {theme === "dark" ? cursorDark : cursorLight}
-      </button>
-      <h1 className="mx-auto text-4xl font-oswald font-bold text-center uppercase dark:text-pink-500 text-orange-500">
-        Películas
-      </h1>
-      
+        <button
+          onClick={handleSwitch}
+          className="text-black bg-yellow-100 dark:bg-slate-700 dark:text-white border border-red-500 py-2 px-4 rounded-full  w-12"
+        >
+          {theme === "dark" ? cursorDark : cursorLight}
+        </button>
+        <h1 className="mx-auto text-4xl font-oswald font-bold text-center uppercase dark:text-pink-500 text-orange-500">
+          Películas
+        </h1>
       </div>
       {content.length > 0 ? (
         <div className="flex flex-wrap mt-10 ml-6 justify-around space-y-2 ">
@@ -66,8 +66,14 @@ const Pelis = () => {
               {" "}
               <div
                 key={popular.id}
-                className="w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 rounded-lg relative hover:bg-black dark:hover:text-white dark:text-black"
+                className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 rounded-lg relative hover:bg-black dark:hover:text-white dark:text-black"
               >
+                <Badge
+                  color={popular.vote_average > 7 ? "success" : (popular.vote_average >= 5 ? "primary" : "error")}
+                  className="flex justify-end"
+                  badgeContent={popular.vote_average.toFixed(1)}
+                />
+
                 <img
                   src={
                     popular.poster_path !== null
@@ -82,7 +88,7 @@ const Pelis = () => {
                     {popular.title}
                   </h1>
                   <div className="flex justify-between items-end">
-                    <span className="text-xs">{popular.original_language}</span>
+                  <span className="text-xs w-6 h-5">{popular.original_language === "en" ? <img src="/public/images/eng_us.png"/> : (popular.original_language === "es" ? <img src="/public/images/spa.webp"/> : (popular.original_language === "zh" ? <img src="/public/images/zh.webp"/> : (popular.original_language === "pt" ? <img src="/public/images/pt.png"/> : (popular.original_language === "gr" ? <img src="/public/images/gr.png"/> : <img src="/public/images/eng_us.png"/>))))}</span>
                     <p className="text-xs">{popular.release_date}</p>
                   </div>
                 </div>
