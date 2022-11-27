@@ -60,7 +60,7 @@ const Pelis = () => {
                   <div className="flex justify-between items-end">
                     <span className="text-xs w-6 h-5">
                       {popular.original_language === "en" ? (
-                        <img src="src/images/eng_us.png" alt="" />
+                        <img src="images/eng_us.png" alt="" />
                       ) : popular.original_language === "es" ? (
                         <img src="src/images/spa.webp" alt="" />
                       ) : popular.original_language === "zh" ? (
