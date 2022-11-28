@@ -89,7 +89,7 @@ const Series = () => {
                         <img src="images/eng_us.png" />
                       )}
                     </span>
-                    <p className="text-xs">{popular.first_air_date}</p>
+                    <p className="text-xs">{popular.first_air_date.substr(0,4)}</p>
                   </div>
                 </div>
               </div>

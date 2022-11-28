@@ -42,7 +42,7 @@ const NavBar = () => {
   //   setContent(data.results);
   //   console.log(data.results);
   // };
-  console.log(searchText);
+
   const navigate = useNavigate();
   const handleChange = (e, searchInput) => {
     // const query = document.getElementById("search").value;

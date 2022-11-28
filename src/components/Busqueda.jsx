@@ -14,20 +14,22 @@ const Busqueda = () => {
 
   useEffect(() => {
     fetch(API_SRCH + query).then((res) =>
-      res.json().then((data) => setContent(data.results))
+      res.json().then((data) => {
+        setContent(data.results);
+      })
     );
   }, [content]);
 
   return (
     <div className="max-w-2/3 w-screen h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
-      <Title titulo="Busqueda" />
+      <Title titulo="Búsqueda" />
       {content.length > 0 ? (
         <div className="flex flex-wrap mt-10 ml-6 justify-around  ">
-          {content.map((popular, ind) => (
+          {content.map((popular, i) => (
             // CAJA
             <Button>
               <div
-                key={ind}
+                key={i}
                 className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
               >
                 {/* <ContentModal
@@ -47,17 +49,22 @@ const Busqueda = () => {
                       : "error"
                   }
                   className="flex justify-end"
-                  badgeContent={popular.vote_average.toFixed(1)}
+                  badgeContent={popular.vote_average}
                 />
-                <img
-                  src={
-                    popular.poster_path !== null
-                      ? API_IMG + popular.poster_path
-                      : noImage
-                  }
-                  alt={popular.title || popular.name}
-                  className="rounded-t-lg hover:scale-105 h-[230px]"
-                />
+                {!popular.poster_path || popular.poster_path === null ? (
+                  <img
+                    src={noImage}
+                    alt={popular.title || popular.name}
+                    className="rounded-t-lg hover:scale-105 h-[230px]"
+                  />
+                ) : (
+                  <img
+                    src={API_IMG + popular.poster_path}
+                    alt={popular.title || popular.name}
+                    className="rounded-t-lg hover:scale-105 h-[230px]"
+                  />
+                )}
+                
                 <div className="flex-col space-y-4">
                   {popular.title != null ? (
                     <div className="">

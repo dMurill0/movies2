@@ -26,7 +26,7 @@ const Pelis = () => {
       <Title titulo="Películas" />
       {content.length > 0 ? (
         <div className="flex flex-wrap mt-10 ml-6 justify-around  ">
-          {content.map((popular,indice) => (
+          {content.map((popular, indice) => (
             // CAJA
             <Button open={open} onClick={handleOpen}>
               <div
@@ -74,7 +74,9 @@ const Pelis = () => {
                         <img src="images/eng_us.png" alt="" />
                       )}
                     </span>
-                    <p className="text-xs">{popular.release_date}</p>
+                    <p className="text-xs">
+                      {popular.release_date.substr(0, 4)}
+                    </p>
                   </div>
                 </div>
               </div>

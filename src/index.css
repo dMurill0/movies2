@@ -1,6 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
 @tailwind base;
+
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #e0cece;
+  border-radius: 5px;
+}
 @tailwind components;
 @tailwind utilities;
 
