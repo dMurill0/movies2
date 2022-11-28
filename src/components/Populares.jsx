@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FaMoon } from "react-icons/fa";
-import { BsFillSunFill, BsSearch } from "react-icons/bs";
 import { Badge, Button } from "@mui/material";
 import { motion } from "framer-motion";
 import Title from "./layout/Title";
@@ -21,11 +19,11 @@ const Populares = () => {
 
   const [openModal, setOpenModal] = useState(false);
   const handleOpen = () => setOpenModal(true);
-
+  console.log(content);
   return (
-    <div>
-      <div className="max-w-2/3 w-screen h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
-        <Title titulo="Populares" />
+    <div className="max-w-[1920px] w-screen h-fit">
+      <div className="p-5 flex-col flex-wrap justify-center bg-slate-500 ">
+        <Title titulo="Populares"  />
         {content.length > 0 ? (
           <div className="flex flex-wrap mt-10 ml-6 justify-around  ">
             {content.map((popular, ind) => (
@@ -93,7 +91,7 @@ const Populares = () => {
                       </div>
                     )}
                     <div className="flex justify-between items-end">
-                      <span className="text-xs">
+                      <span className="text-xs font-oswald">
                         {popular.media_type === "tv" ? "Serie" : "Película"}
                       </span>
                       <p className="text-xs">

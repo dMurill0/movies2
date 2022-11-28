@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FaMoon } from "react-icons/fa";
-import { BsFillSunFill, BsSearch } from "react-icons/bs";
+import { RiSunFill } from "react-icons/ri";
 import { motion } from "framer-motion";
-const Title = ({titulo}) => {
+const Title = ({ titulo }) => {
   const handleSwitch = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
@@ -10,13 +10,13 @@ const Title = ({titulo}) => {
   const cursorLight = (
     <div>
       <FaMoon className="text-white hidden" />
-      <BsFillSunFill className="text-orange-400" />
+      <RiSunFill className="text-orange-400 text-md" />
     </div>
   );
   const cursorDark = (
     <div>
       <FaMoon className="text-white " />
-      <BsFillSunFill className="text-black hidden" />
+      <RiSunFill className="text-black hidden" />
     </div>
   );
   const [theme, setTheme] = useState("light");
@@ -29,7 +29,8 @@ const Title = ({titulo}) => {
   }, [theme]);
   return (
     <div className="flex w-full justify-between ">
-      <motion.button initial={{
+      <motion.button
+        initial={{
           x: -500,
           opacity: 0,
           scale: 0.5,
@@ -40,14 +41,15 @@ const Title = ({titulo}) => {
           scale: 1,
         }}
         transition={{
-          duration: 2.5,
+          duration: 1.2,
         }}
         onClick={handleSwitch}
-        className="text-black bg-yellow-100 dark:bg-slate-700 dark:text-white border border-red-500 py-2 px-4 rounded-full m-4 w-12"
+        className="text-black bg-slate-200 dark:bg-slate-700 dark:text-white border border-red-500 py-1 px-2 rounded-full m-5 pl-2 w-9"
       >
         {theme === "dark" ? cursorDark : cursorLight}
       </motion.button>
-      <motion.h1 initial={{
+      <motion.h1
+        initial={{
           x: 500,
           opacity: 0,
           scale: 0.5,
@@ -58,8 +60,10 @@ const Title = ({titulo}) => {
           scale: 1,
         }}
         transition={{
-          duration: 2.5,
-        }} className="mx-auto text-6xl font-oswald font-extrabold text-center uppercase dark:text-pink-500 text-orange-500">
+          duration: 1.2,
+        }}
+        className="mx-auto text-6xl font-oswald font-extrabold text-center uppercase dark:text-pink-500 text-orange-500"
+      >
         {titulo}
       </motion.h1>
     </div>

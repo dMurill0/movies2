@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { FaMoon, FaHome, FaTv } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 import { HiFilm } from "react-icons/hi";
 import { SiHbo } from "react-icons/si";
 import { Link, NavLink } from "react-router-dom";
-import { BsFillSunFill, BsSearch } from "react-icons/bs";
+import { BsSearch } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 const NavBar = () => {
@@ -52,7 +52,7 @@ const NavBar = () => {
     // console.log("You clicked submit. " + query);
   };
   return (
-    <div className="h-[100px] w-screen flex justify-between bg-gradient-to-b from-black to-slate-800 dark:bg-gradient-to-b dark:from-purple-500 dark:to-pink-500 border-2 border-b-slate-300 dark:border-b-slate-800">
+    <div className="h-[100px] max-w-[1920px] w-screen flex justify-between bg-gradient-to-b from-black to-slate-800 dark:bg-gradient-to-b dark:from-purple-500 dark:to-pink-500 border-2 border-b-slate-300 dark:border-b-slate-800">
       <motion.div
         initial={{
           x: -500,
@@ -67,26 +67,35 @@ const NavBar = () => {
         transition={{
           duration: 1,
         }}
-        className="flex w-fit items-center h-fit justify-start p-3  md:space-x3 lg:space-x-5 text-white dark:text-black mt-8 ml-4"
+        className="flex w-fit items-center h-fit justify-start p-3 sm:space-x-2 md:space-x-3 lg:space-x-5 text-white dark:text-black mt-8 ml-4"
       >
-        <Link
+        <NavLink
           to="/"
-          className=" font-oswald font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500"
+          className="dark:[&.active]:text-black [&.active]:text-orange-400 text-white hidden sm:block font-oswald font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500 active:text-orange-500 dark:active:text-slate-400'"
         >
-          <FaHome className=" text-2xl text-white hover:text-orange-500 dark:hover:text-white dark:text-black mr-4 items-center" />
-        </Link>
-        <Link
+          Inicio
+        </NavLink>
+        <NavLink to="/">
+          <FaHome className="  sm:hidden text-2xl text-white hover:text-orange-500 dark:hover:text-white dark:text-black mr-4 items-center" />
+        </NavLink>
+        <NavLink
           to="/pelis"
-          className="flex items-center space-x-4 font-oswald font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500"
+          className="dark:[&.active]:text-black [&.active]:text-orange-400 text-white hidden sm:block font-oswald font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500 "
         >
-          <HiFilm className="text-2xl text-white hover:text-orange-500 dark:hover:text-white dark:text-black mr-4" />
-        </Link>
-        <Link
+          Películas
+        </NavLink>
+        <NavLink to="/pelis">
+          <HiFilm className=" sm:hidden text-2xl text-white hover:text-orange-500 dark:hover:text-white dark:text-black mr-4 items-center" />
+        </NavLink>
+        <NavLink
           to="/series"
-          className="flex items-center space-x-4 font-oswald font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500"
+          className="dark:[&.active]:text-black [&.active]:text-orange-400 text-white hidden sm:block font-oswald font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500 "
         >
-          <SiHbo className="text-2xl text-white hover:text-orange-500 dark:hover:text-white dark:text-black mr-4" />
-        </Link>
+          Series
+        </NavLink>
+        <NavLink to="/series">
+          <SiHbo className=" sm:hidden text-2xl text-white hover:text-orange-500 dark:hover:text-white dark:text-black mr-4 items-center" />
+        </NavLink>
       </motion.div>
       <motion.div
         initial={{
@@ -102,10 +111,10 @@ const NavBar = () => {
         transition={{
           duration: 1,
         }}
-        className="flex space-x-2 w-fit mr-8 h-1/3 items-center p-3 mt-8"
+        className="flex space-x-2  mr-8 h-1/3 items-center  mt-8"
       >
         <input
-          className="rounded-lg p-1 font-oswald text-md mx-2 "
+          className="rounded-lg p-1 font-oswald text-md mx-2"
           type="text"
           id="search"
           onKeyUp={(e) => handleChange(e, e.target.value)}

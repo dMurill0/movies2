@@ -1,7 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FaMoon } from "react-icons/fa";
-import { BsFillSunFill, BsSearch } from "react-icons/bs";
 import { Badge, Button } from "@mui/material";
 import Title from "./layout/Title";
 import { motion } from "framer-motion";
@@ -23,7 +21,7 @@ const Pelis = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   return (
-    <div className="w-screen h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
+    <div className="max-w-[1920px] w-screen h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
       <Title titulo="Películas" />
       {content.length > 0 ? (
         <div className="flex flex-wrap mt-10 ml-6 justify-around  ">

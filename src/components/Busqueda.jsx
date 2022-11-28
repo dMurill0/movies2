@@ -21,7 +21,7 @@ const Busqueda = () => {
   }, [content]);
 
   return (
-    <div className="max-w-2/3 w-screen h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
+    <div className="max-w-[1920px] w-screen h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
       <Title titulo="Búsqueda" />
       {content.length > 0 ? (
         <div className="flex flex-wrap mt-10 ml-6 justify-around  ">

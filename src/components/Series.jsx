@@ -37,7 +37,7 @@ const Series = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   return (
-    <div className="max-w-2/3 w-screen h-fit p-5 flex flex-col flex-wrap bg-slate-500 ">
+    <div className=" max-w-[1920px] w-screen h-fit max-w-2/3  p-5 flex flex-col flex-wrap bg-slate-500">
       <Title titulo="Series" />
       {content.length > 0 ? (
         <div className="flex flex-wrap justify-around mt-12 ">
@@ -87,7 +87,7 @@ const Series = () => {
                     {popular.name}
                   </h1>
                   <div className="flex justify-between items-end">
-                    <span className="text-xs w-6 h-5">
+                    <span className="text-xs w-6 h-5 ">
                       {popular.original_language === "en" ? (
                         <img src="images/eng_us.png" />
                       ) : popular.original_language === "es" ? (
@@ -102,7 +102,7 @@ const Series = () => {
                         <img src="images/eng_us.png" />
                       )}
                     </span>
-                    <p className="text-xs">
+                    <p className="text-xs font-oswald">
                       {popular.first_air_date.substr(0, 4)}
                     </p>
                   </div>
