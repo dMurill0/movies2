@@ -4,6 +4,7 @@ import { FaMoon } from "react-icons/fa";
 import { BsFillSunFill, BsSearch } from "react-icons/bs";
 import { Badge, Button } from "@mui/material";
 import Title from "./layout/Title";
+import { motion } from "framer-motion";
 const API_URL =
   "https://api.themoviedb.org/3/movie/popular?api_key=1976c380dd1c386feb7c2778eef34284&language=es&ES";
 const API_IMG = "https://image.tmdb.org/t/p/w300/";
@@ -29,7 +30,20 @@ const Pelis = () => {
           {content.map((popular, indice) => (
             // CAJA
             <Button open={open} onClick={handleOpen}>
-              <div
+              <motion.div
+                initial={{
+                  z: -500,
+                  opacity: 0,
+                  scale: 0.5,
+                }}
+                animate={{
+                  z: 0,
+                  opacity: 1,
+                  scale: 1,
+                }}
+                transition={{
+                  duration: 1.5,
+                }}
                 key={indice}
                 className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
               >
@@ -79,7 +93,7 @@ const Pelis = () => {
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </Button>
           ))}
         </div>

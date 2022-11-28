@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaMoon } from "react-icons/fa";
 import { BsFillSunFill, BsSearch } from "react-icons/bs";
+import { motion } from "framer-motion";
 const Title = ({titulo}) => {
   const handleSwitch = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -28,15 +29,39 @@ const Title = ({titulo}) => {
   }, [theme]);
   return (
     <div className="flex w-full justify-between ">
-      <button
+      <motion.button initial={{
+          x: -500,
+          opacity: 0,
+          scale: 0.5,
+        }}
+        animate={{
+          x: 0,
+          opacity: 1,
+          scale: 1,
+        }}
+        transition={{
+          duration: 2.5,
+        }}
         onClick={handleSwitch}
         className="text-black bg-yellow-100 dark:bg-slate-700 dark:text-white border border-red-500 py-2 px-4 rounded-full m-4 w-12"
       >
         {theme === "dark" ? cursorDark : cursorLight}
-      </button>
-      <h1 className="mx-auto text-6xl font-oswald font-extrabold text-center uppercase dark:text-pink-500 text-orange-500">
+      </motion.button>
+      <motion.h1 initial={{
+          x: 500,
+          opacity: 0,
+          scale: 0.5,
+        }}
+        animate={{
+          x: 0,
+          opacity: 1,
+          scale: 1,
+        }}
+        transition={{
+          duration: 2.5,
+        }} className="mx-auto text-6xl font-oswald font-extrabold text-center uppercase dark:text-pink-500 text-orange-500">
         {titulo}
-      </h1>
+      </motion.h1>
     </div>
   );
 };

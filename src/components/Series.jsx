@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+import { motion } from "framer-motion";
 import { Badge, Button } from "@mui/material";
 import Title from "./layout/Title";
 const API_URL_TV =
@@ -44,7 +44,20 @@ const Series = () => {
           {content.map((popular, indi) => (
             // CAJA
             <Button open={open} onClick={handleOpen}>
-              <div
+              <motion.div
+                initial={{
+                  z: -500,
+                  opacity: 0,
+                  scale: 0.5,
+                }}
+                animate={{
+                  z: 0,
+                  opacity: 1,
+                  scale: 1,
+                }}
+                transition={{
+                  duration: 1.5,
+                }}
                 key={indi}
                 className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
               >
@@ -89,10 +102,12 @@ const Series = () => {
                         <img src="images/eng_us.png" />
                       )}
                     </span>
-                    <p className="text-xs">{popular.first_air_date.substr(0,4)}</p>
+                    <p className="text-xs">
+                      {popular.first_air_date.substr(0, 4)}
+                    </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </Button>
           ))}
         </div>

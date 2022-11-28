@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { FaMoon } from "react-icons/fa";
 import { BsFillSunFill, BsSearch } from "react-icons/bs";
 import { Badge, Button } from "@mui/material";
-// import CustomPagination from "./layout/CustomPagination";
+import { motion } from "framer-motion";
 import Title from "./layout/Title";
-import ContentModal from "./ContentModal";
 const Populares = () => {
   const API =
     "https://api.themoviedb.org/3/trending/all/day?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES";
@@ -32,25 +31,31 @@ const Populares = () => {
             {content.map((popular, ind) => (
               // CAJA
               <Button onClick={handleOpen}>
-                <div
+                <motion.div
+                  initial={{
+                    z: -500,
+                    opacity: 0,
+                    scale: 0.5,
+                  }}
+                  animate={{
+                    z: 0,
+                    opacity: 1,
+                    scale: 1,
+                  }}
+                  transition={{
+                    duration: 1.5,
+                  }}
                   key={ind}
                   className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
                 >
-                   {/* <ContentModal
+                  {/* <ContentModal
                    visible={openModal}
                   children
                   title={popular.title || popular.name}
                   poster={popular.poster_path}
                   overview={popular.overview}
                 />  */}
-                  {/* <ContentModal
-                  key={popular.id}
-                  id={popular.id}
-                  title={popular.title || popular.name}
-                  overview={popular.overview}
-                  vote={popular.vote_average}
-                  language={popular.original_language}
-                /> */}
+
                   <Badge
                     color={
                       popular.vote_average > 7
@@ -98,7 +103,7 @@ const Populares = () => {
                       </p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </Button>
             ))}
             {/* <CustomPagination /> */}
