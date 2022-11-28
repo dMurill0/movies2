@@ -1,48 +1,43 @@
-import React, { useEffect, useState } from "react";
-import { FaMoon } from "react-icons/fa";
-import { BsFillSunFill, BsSearch } from "react-icons/bs";
 import { Badge, Button } from "@mui/material";
-// import CustomPagination from "./layout/CustomPagination";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Title from "./layout/Title";
-import ContentModal from "./ContentModal";
-const Populares = () => {
-  const API =
-    "https://api.themoviedb.org/3/trending/all/day?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES";
+
+const Busqueda = () => {
+  const API_SRCH =
+    "https://api.themoviedb.org/3/search/multi?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES&query=";
   const API_IMG = "https://image.tmdb.org/t/p/w300/";
-  const [content, setContent] = useState([]);
   const noImage = "/public/images/noImagen.jpg";
+  const { query } = useParams();
+
+  const [content, setContent] = useState([]);
+
   useEffect(() => {
-    fetch(API)
-      .then((res) => res.json())
-      .then((data) => setContent(data.results))
-      .catch((error) => console.log(error));
-  }, []);
-
-  const [page, setPage] = useState();
-
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+    fetch(API_SRCH + query).then((res) =>
+      res.json().then((data) => setContent(data.results))
+    );
+  }, [content]);
 
   return (
     <div className="max-w-2/3 w-screen h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
-      <Title titulo="Populares" />
+      <Title titulo="Busqueda" />
       {content.length > 0 ? (
         <div className="flex flex-wrap mt-10 ml-6 justify-around  ">
-          {content.map((popular,ind) => (
+          {content.map((popular, ind) => (
             // CAJA
-            <Button open={open} onClick={handleOpen}>
+            <Button>
               <div
                 key={ind}
                 className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
               >
                 {/* <ContentModal
-                  key={popular.id}
-                  id={popular.id}
-                  title={popular.title || popular.name}
-                  overview={popular.overview}
-                  vote={popular.vote_average}
-                  language={popular.original_language}
-                /> */}
+              key={popular.id}
+              id={popular.id}
+              title={popular.title || popular.name}
+              overview={popular.overview}
+              vote={popular.vote_average}
+              language={popular.original_language}
+            /> */}
                 <Badge
                   color={
                     popular.vote_average > 7
@@ -61,20 +56,20 @@ const Populares = () => {
                       : noImage
                   }
                   alt={popular.title || popular.name}
-                  className="rounded-t-lg hover:scale-105 "
+                  className="rounded-t-lg hover:scale-105 h-[230px]"
                 />
                 <div className="flex-col space-y-4">
                   {popular.title != null ? (
-                    <div className="truncate">
-                      <h1 className="text-md font-oswald text-center">
+                    <div className="">
+                      <h1 className="text-md font-oswald text-center truncate">
                         {popular.title}
                       </h1>
-                      <h1 className="hidden">{popular.name}</h1>
+                      <h1 className="hidden ">{popular.name}</h1>
                     </div>
                   ) : (
                     <div className="w-lg overflow-x-hidden">
                       <h1 className="hidden">{popular.title}</h1>
-                      <h1 className="text-md font-oswald text-center">
+                      <h1 className="text-md font-oswald text-center truncate">
                         {popular.name}
                       </h1>
                     </div>
@@ -100,4 +95,4 @@ const Populares = () => {
   );
 };
 
-export default Populares;
+export default Busqueda;

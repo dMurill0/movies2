@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaMoon } from "react-icons/fa";
 import { BsFillSunFill, BsSearch } from "react-icons/bs";
-import { Badge } from "@mui/material";
+import { Badge, Button } from "@mui/material";
 import Title from "./layout/Title";
 const API_URL =
   "https://api.themoviedb.org/3/movie/popular?api_key=1976c380dd1c386feb7c2778eef34284&language=es&ES";
@@ -19,17 +19,18 @@ const Pelis = () => {
   useEffect(() => {
     fetchPelis();
   }, []);
-
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
   return (
     <div className="w-screen h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
       <Title titulo="Películas" />
       {content.length > 0 ? (
         <div className="flex flex-wrap mt-10 ml-6 justify-around  ">
-          {content.map((popular) => (
+          {content.map((popular,indice) => (
             // CAJA
-            <a href="">
+            <Button open={open} onClick={handleOpen}>
               <div
-                key={popular.id}
+                key={indice}
                 className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
               >
                 <Badge
@@ -62,22 +63,22 @@ const Pelis = () => {
                       {popular.original_language === "en" ? (
                         <img src="images/eng_us.png" alt="" />
                       ) : popular.original_language === "es" ? (
-                        <img src="src/images/spa.webp" alt="" />
+                        <img src="images/spa.webp" alt="" />
                       ) : popular.original_language === "zh" ? (
-                        <img src="src/images/zh.webp" alt="" />
+                        <img src="images/zh.webp" alt="" />
                       ) : popular.original_language === "pt" ? (
-                        <img src="src/images/pt.png" alt="" />
+                        <img src="images/pt.png" alt="" />
                       ) : popular.original_language === "el" ? (
-                        <img src="src/images/gr.jpg" alt="" />
+                        <img src="images/gr.jpg" alt="" />
                       ) : (
-                        <img src="/src/images/eng_us.png" alt="" />
+                        <img src="images/eng_us.png" alt="" />
                       )}
                     </span>
                     <p className="text-xs">{popular.release_date}</p>
                   </div>
                 </div>
               </div>
-            </a>
+            </Button>
           ))}
         </div>
       ) : (

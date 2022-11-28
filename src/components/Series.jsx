@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-import { Badge } from "@mui/material";
+import { Badge, Button } from "@mui/material";
 import Title from "./layout/Title";
 const API_URL_TV =
   "https://api.themoviedb.org/3/tv/popular?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES";
@@ -34,18 +34,18 @@ const Series = () => {
   //   .then(response => response.json())
   //   .then(response => console.log(response))
   //   .catch(err => console.error(err));
-
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
   return (
     <div className="max-w-2/3 w-screen h-fit p-5 flex flex-col flex-wrap bg-slate-500 ">
       <Title titulo="Series" />
       {content.length > 0 ? (
         <div className="flex flex-wrap justify-around mt-12 ">
-          {content.map((popular) => (
+          {content.map((popular, indi) => (
             // CAJA
-            <a href="">
-              {" "}
+            <Button open={open} onClick={handleOpen}>
               <div
-                key={popular.id}
+                key={indi}
                 className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
               >
                 <Badge
@@ -86,14 +86,14 @@ const Series = () => {
                       ) : popular.original_language === "el" ? (
                         <img src="images/gr.png" />
                       ) : (
-                        <img src="/src/images/eng_us.png" />
+                        <img src="images/eng_us.png" />
                       )}
                     </span>
                     <p className="text-xs">{popular.first_air_date}</p>
                   </div>
                 </div>
               </div>
-            </a>
+            </Button>
           ))}
         </div>
       ) : (

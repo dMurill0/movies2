@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -16,8 +16,7 @@ const style = {
   p: 4,
 };
 
-export default function ContentModal({
-  children,
+export default function BasicModal({
   id,
   title,
   overview,
@@ -30,9 +29,6 @@ export default function ContentModal({
 
   return (
     <div>
-      <Button type="button" onClick={handleOpen}>
-        {children}
-      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -41,11 +37,12 @@ export default function ContentModal({
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            {title}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            {overview}
           </Typography>
+          <Typography>{vote}</Typography>
         </Box>
       </Modal>
     </div>
