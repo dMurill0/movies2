@@ -3,10 +3,13 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Badge, Button } from "@mui/material";
 import Title from "./layout/Title";
+import { FaMoon } from "react-icons/fa";
+import { RiSunFill } from "react-icons/ri";
 const API_URL_TV =
   "https://api.themoviedb.org/3/tv/popular?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES";
 const API_IMG = "https://image.tmdb.org/t/p/w300/";
-const Series = () => {
+
+const Series = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const [content, setContent] = useState([]);
 
   const fetchSeries = async () => {
@@ -19,26 +22,17 @@ const Series = () => {
     fetchSeries();
   }, []);
 
-  // NEW API
-  // const options = {
-  //   method: 'POST',
-  //   headers: {
-  //     'content-type': 'application/json',
-  //     'X-RapidAPI-Key': '23a0f569fbmsh03f56c82550e9e4p1be1a7jsn7dc836d59ba8',
-  //     'X-RapidAPI-Host': 'watch-here.p.rapidapi.com'
-  //   },
-  //   body: '{"mediaType":"movie","platform":true,"title":"rings of power"}'
-  // };
-
-  // fetch('https://watch-here.p.rapidapi.com/wheretowatch', options)
-  //   .then(response => response.json())
-  //   .then(response => console.log(response))
-  //   .catch(err => console.error(err));
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   return (
     <div className=" max-w-[1920px] w-screen h-fit max-w-2/3  p-5 flex flex-col flex-wrap bg-slate-500">
-      <Title titulo="Series" />
+      <Title
+        titulo="Series"
+        theme={theme}
+        cursorDark={cursorDark}
+        cursorLight={cursorLight}
+        handleSwitch={handleSwitch}
+      />
       {content.length > 0 ? (
         <div className="flex flex-wrap justify-around mt-12 ">
           {content.map((popular) => (

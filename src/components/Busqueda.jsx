@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import Error404 from "./Error404";
 import Title from "./layout/Title";
 
-const Busqueda = () => {
+const Busqueda = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const API_SRCH =
     "https://api.themoviedb.org/3/search/multi?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES&query=";
   const API_IMG = "https://image.tmdb.org/t/p/w300/";
@@ -22,7 +22,13 @@ const Busqueda = () => {
 
   return (
     <div className="max-w-[1920px] w-screen h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
-      <Title titulo="Búsqueda" />
+      <Title
+        titulo="Búsqueda"
+        theme={theme}
+        cursorDark={cursorDark}
+        cursorLight={cursorLight}
+        handleSwitch={handleSwitch}
+      />
       {content.length > 0 ? (
         <div className="flex flex-wrap mt-10 ml-6 justify-around  ">
           {content.map((popular) => (

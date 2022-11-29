@@ -3,10 +3,12 @@ import React, { useEffect, useState } from "react";
 import { Badge, Button } from "@mui/material";
 import Title from "./layout/Title";
 import { motion } from "framer-motion";
+
 const API_URL =
   "https://api.themoviedb.org/3/movie/popular?api_key=1976c380dd1c386feb7c2778eef34284&language=es&ES";
 const API_IMG = "https://image.tmdb.org/t/p/w300/";
-const Pelis = () => {
+
+const Pelis = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const [content, setContent] = useState([]);
 
   const fetchPelis = async () => {
@@ -20,9 +22,16 @@ const Pelis = () => {
   }, []);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
+
   return (
     <div className="max-w-[1920px] w-screen h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
-      <Title titulo="Películas" />
+      <Title
+        titulo="Películas"
+        theme={theme}
+        cursorDark={cursorDark}
+        cursorLight={cursorLight}
+        handleSwitch={handleSwitch}
+      />
       {content.length > 0 ? (
         <div className="flex flex-wrap mt-10 ml-6 justify-around  ">
           {content.map((popular) => (

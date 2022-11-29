@@ -3,31 +3,7 @@ import { FaMoon } from "react-icons/fa";
 import { RiSunFill } from "react-icons/ri";
 import { motion } from "framer-motion";
 
-const Title = ({ titulo }) => {
-  const handleSwitch = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
-
-  const cursorLight = (
-    <div>
-      <FaMoon className="text-white hidden" />
-      <RiSunFill className="text-orange-400 text-md" />
-    </div>
-  );
-  const cursorDark = (
-    <div>
-      <FaMoon className="text-white " />
-      <RiSunFill className="text-black hidden" />
-    </div>
-  );
-  const [theme, setTheme] = useState("light");
-  useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [theme]);
+const Title = ({ titulo, theme, cursorDark, cursorLight, handleSwitch }) => {
   return (
     <div className="flex w-full justify-between ">
       <motion.button

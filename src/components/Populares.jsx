@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Badge, Button } from "@mui/material";
 import { motion } from "framer-motion";
 import Title from "./layout/Title";
-const Populares = () => {
+import { FaMoon } from "react-icons/fa";
+import { RiSunFill } from "react-icons/ri";
+const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const API =
     "https://api.themoviedb.org/3/trending/all/day?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES";
   const API_IMG = "https://image.tmdb.org/t/p/w300/";
@@ -23,7 +25,13 @@ const Populares = () => {
   return (
     <div className="max-w-[1920px] w-screen h-fit">
       <div className="p-5 flex-col flex-wrap justify-center bg-slate-500 ">
-        <Title titulo="Populares" />
+        <Title
+          titulo="Populares"
+          theme={theme}
+          cursorDark={cursorDark}
+          cursorLight={cursorLight}
+          handleSwitch={handleSwitch}
+        />
         {content.length > 0 ? (
           <div className="flex flex-wrap mt-10 ml-6 justify-around  ">
             {content.map((popular) => (

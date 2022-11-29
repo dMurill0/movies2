@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { FaMoon } from "react-icons/fa";
+import { RiSunFill } from "react-icons/ri";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "../App";
 import Busqueda from "../components/Busqueda";
@@ -9,15 +11,90 @@ import Populares from "../components/Populares";
 import Series from "../components/Series";
 
 const MisRutas = () => {
+  const handleSwitch = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
+  const cursorLight = (
+    <div>
+      <FaMoon className="text-white hidden" />
+      <RiSunFill className="text-orange-400 text-md" />
+    </div>
+  );
+  const cursorDark = (
+    <div>
+      <FaMoon className="text-white " />
+      <RiSunFill className="text-black hidden" />
+    </div>
+  );
+  const [theme, setTheme] = useState("light");
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
+
   return (
     <BrowserRouter className="h-fit w-[1200px]">
       <NavBar />
       <Routes>
-        <Route path="/" element={<Populares />}></Route>
-        <Route path="/pelis" element={<Pelis />}></Route>
-        <Route path="/series" element={<Series />}></Route>
-        <Route path="/search" element={<Busqueda />}></Route>
-        <Route path="/search/:query" element={<Busqueda />}></Route>
+        <Route
+          path="/"
+          element={
+            <Populares
+              theme={theme}
+              cursorDark={cursorDark}
+              cursorLight={cursorLight}
+              handleSwitch={handleSwitch}
+            />
+          }
+        ></Route>
+        <Route
+          path="/pelis"
+          element={
+            <Pelis
+              theme={theme}
+              cursorDark={cursorDark}
+              cursorLight={cursorLight}
+              handleSwitch={handleSwitch}
+            />
+          }
+        ></Route>
+        <Route
+          path="/series"
+          element={
+            <Series
+              theme={theme}
+              cursorDark={cursorDark}
+              cursorLight={cursorLight}
+              handleSwitch={handleSwitch}
+            />
+          }
+        ></Route>
+        <Route
+          path="/search"
+          element={
+            <Busqueda
+              theme={theme}
+              cursorDark={cursorDark}
+              cursorLight={cursorLight}
+              handleSwitch={handleSwitch}
+            />
+          }
+        ></Route>
+        <Route
+          path="/search/:query"
+          element={
+            <Busqueda
+              theme={theme}
+              cursorDark={cursorDark}
+              cursorLight={cursorLight}
+              handleSwitch={handleSwitch}
+            />
+          }
+        ></Route>
         <Route path="*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>
