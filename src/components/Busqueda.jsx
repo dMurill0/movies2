@@ -21,7 +21,7 @@ const Busqueda = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   }, [content]);
 
   return (
-    <div className="max-w-[1920px] h-screen w-screen h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
+    <div className="max-w-[1920px] w-screen h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
       <Title
         titulo="Búsqueda"
         theme={theme}
@@ -89,7 +89,11 @@ const Busqueda = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
                       {popular.media_type === "tv" ? "Serie" : "Película"}
                     </span>
                     <p className="text-xs">
-                      {popular.first_air_date || popular.release_date}
+                      {!popular.first_air_date && !popular.release_date
+                        ? ""
+                        : popular.first_air_date
+                        ? popular.first_air_date.substr(0, 4)
+                        : popular.release_date.substr(0, 4)}
                     </p>
                   </div>
                 </div>
