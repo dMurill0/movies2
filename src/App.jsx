@@ -1,4 +1,3 @@
-import "./App.css";
 import MisRutas from "./router/MisRutas";
 
 function App() {

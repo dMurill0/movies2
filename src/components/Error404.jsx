@@ -4,10 +4,10 @@ import Title from "./layout/Title";
 const Error404 = () => {
   return (
     <div className="max-w-[1920px] w-screen h-screen  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
-      <h1 className="text-4xl font-oswald text-center mt-12">
+      <h1 className="text-xl font-oswald text-center uppercase">
         No se encontraron resultados de la búsqueda
       </h1>
-      <img className="w-1/2 p-4 m-2" src="images/error.jpg" alt="error" />
+      <img className="h-[420px] mx-auto mt-4 opacity-20" src="/images/error.webp" alt="" />
     </div>
   );
 };

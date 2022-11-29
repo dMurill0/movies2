@@ -21,7 +21,7 @@ const Busqueda = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   }, [content]);
 
   return (
-    <div className="max-w-[1920px] w-screen h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
+    <div className="max-w-[1920px] h-screen w-screen h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
       <Title
         titulo="Búsqueda"
         theme={theme}

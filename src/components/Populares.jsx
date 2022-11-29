@@ -51,7 +51,7 @@ const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
                   transition={{
                     duration: 1.5,
                   }}
-                  className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
+                  className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-pink-200 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
                 >
                   {/* <ContentModal
                    visible={openModal}
