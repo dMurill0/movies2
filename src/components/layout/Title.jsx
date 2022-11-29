@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaMoon } from "react-icons/fa";
 import { RiSunFill } from "react-icons/ri";
 import { motion } from "framer-motion";
+
 const Title = ({ titulo }) => {
   const handleSwitch = () => {
     setTheme(theme === "dark" ? "light" : "dark");

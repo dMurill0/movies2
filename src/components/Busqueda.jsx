@@ -1,6 +1,7 @@
 import { Badge, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Error404 from "./Error404";
 import Title from "./layout/Title";
 
 const Busqueda = () => {
@@ -9,7 +10,6 @@ const Busqueda = () => {
   const API_IMG = "https://image.tmdb.org/t/p/w300/";
   const noImage = "/public/images/noImagen.jpg";
   const { query } = useParams();
-
   const [content, setContent] = useState([]);
 
   useEffect(() => {
@@ -25,13 +25,10 @@ const Busqueda = () => {
       <Title titulo="Búsqueda" />
       {content.length > 0 ? (
         <div className="flex flex-wrap mt-10 ml-6 justify-around  ">
-          {content.map((popular, i) => (
+          {content.map((popular) => (
             // CAJA
-            <Button>
-              <div
-                key={i}
-                className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
-              >
+            <Button key={popular.id}>
+              <div className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black">
                 {/* <ContentModal
               key={popular.id}
               id={popular.id}
@@ -64,7 +61,7 @@ const Busqueda = () => {
                     className="rounded-t-lg hover:scale-105 h-[230px]"
                   />
                 )}
-                
+
                 <div className="flex-col space-y-4">
                   {popular.title != null ? (
                     <div className="">
@@ -96,7 +93,7 @@ const Busqueda = () => {
           {/* <CustomPagination /> */}
         </div>
       ) : (
-        <h2>Sorry !! No Movies Found</h2>
+        <Error404 />
       )}
     </div>
   );

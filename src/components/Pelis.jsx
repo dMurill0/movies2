@@ -25,9 +25,9 @@ const Pelis = () => {
       <Title titulo="Películas" />
       {content.length > 0 ? (
         <div className="flex flex-wrap mt-10 ml-6 justify-around  ">
-          {content.map((popular, indice) => (
+          {content.map((popular) => (
             // CAJA
-            <Button open={open} onClick={handleOpen}>
+            <Button key={popular.id} open={open} onClick={handleOpen}>
               <motion.div
                 initial={{
                   z: -500,
@@ -42,7 +42,6 @@ const Pelis = () => {
                 transition={{
                   duration: 1.5,
                 }}
-                key={indice}
                 className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
               >
                 <Badge

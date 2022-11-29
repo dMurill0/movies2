@@ -41,9 +41,9 @@ const Series = () => {
       <Title titulo="Series" />
       {content.length > 0 ? (
         <div className="flex flex-wrap justify-around mt-12 ">
-          {content.map((popular, indi) => (
+          {content.map((popular) => (
             // CAJA
-            <Button open={open} onClick={handleOpen}>
+            <Button key={popular.id} open={open} onClick={handleOpen}>
               <motion.div
                 initial={{
                   z: -500,
@@ -58,7 +58,6 @@ const Series = () => {
                 transition={{
                   duration: 1.5,
                 }}
-                key={indi}
                 className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
               >
                 <Badge

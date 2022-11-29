@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "../App";
 import Busqueda from "../components/Busqueda";
+import Error404 from "../components/Error404";
 import NavBar from "../components/layout/NavBar";
 import Pelis from "../components/Pelis";
 import Populares from "../components/Populares";
@@ -17,15 +18,7 @@ const MisRutas = () => {
         <Route path="/series" element={<Series />}></Route>
         <Route path="/search" element={<Busqueda />}></Route>
         <Route path="/search/:query" element={<Busqueda />}></Route>
-        <Route
-          path="*"
-          element={
-            <div className="h-fit w-fit bg-slate-500">
-              <h1 className="font-4xl font-bold">Error 404</h1>
-              <p>Página no encontrada</p>
-            </div>
-          }
-        />
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>
   );
