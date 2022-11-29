@@ -5,6 +5,7 @@ import { Badge, Button } from "@mui/material";
 import Title from "./layout/Title";
 import { FaMoon } from "react-icons/fa";
 import { RiSunFill } from "react-icons/ri";
+import Footer from "./layout/Footer";
 const API_URL_TV =
   "https://api.themoviedb.org/3/tv/popular?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES";
 const API_IMG = "https://image.tmdb.org/t/p/w300/";
@@ -105,8 +106,9 @@ const Series = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
           ))}
         </div>
       ) : (
-        <h2>Sorry !! No Movies Found</h2>
+        <h2></h2>
       )}
+      <Footer />
     </div>
   );
 };

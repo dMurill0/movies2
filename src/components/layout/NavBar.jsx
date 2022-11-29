@@ -7,52 +7,13 @@ import { BsSearch } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 const NavBar = () => {
-  // const API = `https://api.themoviedb.org/3/search/movie?api_key=1976c380dd1c386feb7c2778eef34284&query=`;
-  // // const [theme, setTheme] = useState("light");
-  // // useEffect(() => {
-  // //   if (theme === "dark") {
-  // //     document.documentElement.classList.add("dark");
-  // //   } else {
-  // //     document.documentElement.classList.remove("dark");
-  // //   }
-  // // }, [theme]);
-
-  // // const handleSwitch = () => {
-  // //   setTheme(theme === "dark" ? "light" : "dark");
-  // // };
-
-  // // const cursorLight = (
-  // //   <div>
-  // //     <FaMoon className="text-white hidden" />
-  // //     <BsFillSunFill className="text-orange-400" />
-  // //   </div>
-  // // );
-  // // const cursorDark = (
-  // //   <div>
-  // //     <FaMoon className="text-white " />
-  // //     <BsFillSunFill className="text-black hidden" />
-  // //   </div>
-  // // );
-  // const [content, setContent] = useState([]);
   const [searchText, setSearchText] = useState("");
-
-  // const fetchSearch = async () => {
-  //   const { data } = await axios.get(API + searchText);
-  //   setContent(data.results);
-  //   console.log(data.results);
-  // };
-
   const navigate = useNavigate();
   const handleChange = (e, searchInput) => {
-    // const query = document.getElementById("search").value;
     setSearchText(searchInput);
-
-    // navigate("/search", { query: searchText }), [navigate];
-
-    // console.log("You clicked submit. " + query);
   };
   return (
-    <div className="h-[100px] max-w-[1920px] w-screen flex justify-between bg-gradient-to-b from-black to-slate-800 dark:bg-gradient-to-b dark:from-purple-500 dark:to-pink-500 border-2 border-b-slate-300 dark:border-b-slate-800">
+    <div className="h-[90px] max-w-[1920px] w-screen flex justify-between bg-gradient-to-b from-black to-slate-800 dark:bg-gradient-to-b dark:from-purple-500 dark:to-pink-500 border-2 border-b-slate-300 dark:border-b-slate-800">
       <motion.div
         initial={{
           x: -500,
@@ -67,11 +28,11 @@ const NavBar = () => {
         transition={{
           duration: 1,
         }}
-        className="flex w-fit items-center h-fit justify-start p-3 sm:space-x-2 md:space-x-3 lg:space-x-5 text-white dark:text-black mt-8 ml-4"
+        className="flex w-fit items-center h-fit justify-start  sm:space-x-2 md:space-x-3 lg:space-x-5 text-white dark:text-black mt-8 ml-4"
       >
         <NavLink
           to="/"
-          className="dark:[&.active]:text-black [&.active]:text-orange-400 text-white hidden sm:block font-oswald font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500 active:text-orange-500 dark:active:text-slate-400'"
+          className="dark:[&.active]:text-black [&.active]:text-orange-400 text-white hidden sm:block font-oswald font-semibold text-md md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500 active:text-orange-500 dark:active:text-slate-400'"
         >
           Inicio
         </NavLink>
@@ -125,19 +86,9 @@ const NavBar = () => {
           to={"/search/" + searchText}
           type="submit"
           className="dark:text-black mr-6 text-xl text-orange-500"
-          // onClick={(e) => handleChange(e, searchInput)}
+
         >
           <BsSearch
-          // onSubmit={
-          //   <Busqueda
-          //     id={content.id}
-          //     title={content.title || content.name}
-          //     vote={content.vote_average}
-          //     poster={content.poster_path}
-          //     language={content.original_language}
-          //     release={content.release_date || content.first_air_date}
-          //   />
-          // }
           />
         </Link>
       </motion.div>

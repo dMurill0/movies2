@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Badge, Button } from "@mui/material";
 import Title from "./layout/Title";
 import { motion } from "framer-motion";
+import Footer from "./layout/Footer";
 
 const API_URL =
   "https://api.themoviedb.org/3/movie/popular?api_key=1976c380dd1c386feb7c2778eef34284&language=es&ES";
@@ -104,8 +105,9 @@ const Pelis = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
           ))}
         </div>
       ) : (
-        <h2>Sorry !! No Movies Found</h2>
+        <h2></h2>
       )}
+      <Footer />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "../App";
 import Busqueda from "../components/Busqueda";
 import Error404 from "../components/Error404";
+import Footer from "../components/layout/Footer";
 import NavBar from "../components/layout/NavBar";
 import Pelis from "../components/Pelis";
 import Populares from "../components/Populares";
@@ -37,7 +38,7 @@ const MisRutas = () => {
   }, [theme]);
 
   return (
-    <BrowserRouter className="h-fit w-[1200px]">
+    <BrowserRouter className=" w-[1200px]">
       <NavBar />
       <Routes>
         <Route
