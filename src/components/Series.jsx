@@ -27,7 +27,7 @@ const Series = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   return (
-    <div className=" max-w-[1920px] w-screen h-fit max-w-2/3  p-5 flex flex-col flex-wrap bg-slate-500">
+    <div className=" w-fit h-fit max-w-2/3  p-5 flex flex-col flex-wrap bg-slate-500">
       <Title
         titulo="Series"
         theme={theme}

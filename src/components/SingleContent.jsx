@@ -1,6 +1,6 @@
 import { Badge } from "@mui/material";
 import ContentModal from "./ContentModal";
-
+import { motion } from "framer-motion";
 const API_IMG = "https://image.tmdb.org/t/p/w300/";
 const noImage = "images/noImagen.jpg";
 const SingleContent = ({
@@ -14,7 +14,22 @@ const SingleContent = ({
 }) => {
   return (
     <ContentModal media_type={media_type} id={id}>
-      <div className="cursor-pointer flex flex-col w-[300px] bg-slate-800 text-white dark:bg-slate-300 p-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black">
+      <motion.div
+        initial={{
+          x: -500,
+          opacity: 0,
+          scale: 0.5,
+        }}
+        animate={{
+          x: 0,
+          opacity: 1,
+          scale: 1,
+        }}
+        transition={{
+          duration: 1,
+        }}
+        className="cursor-pointer flex flex-col w-[300px] bg-slate-800 text-white hover:text-black dark:bg-slate-300 p-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
+      >
         <Badge
           color={
             vote_average > 7
@@ -33,27 +48,34 @@ const SingleContent = ({
           className="rounded-t-lg "
         />
         <div className="flex-col space-y-4">
-          <h1 className="text-md font-oswald text-center truncate">{title}</h1>
+          <h1 className="text-xl font-oswald text-center truncate">{title}</h1>
           <div className="flex justify-between items-end">
-            <span className="text-xs w-6 h-5">
-              {language === "en" ? (
-                <img src="images/eng_us.png" alt="" />
-              ) : language === "es" ? (
-                <img src="images/spa.webp" alt="" />
-              ) : language === "zh" ? (
-                <img src="images/eng_us.png" alt="" />
-              ) : language === "pt" ? (
-                <img src="images/pt.png" alt="" />
-              ) : language === "el" ? (
-                <img src="images/gr.jpg" alt="" />
-              ) : (
-                <img src="images/eng_us.png" alt="" />
-              )}
-            </span>
+            {language ? (
+              <span className="text-xs w-6 h-5">
+                {language === "en" ? (
+                  <img src="images/eng_us.png" alt="" />
+                ) : language === "es" ? (
+                  <img src="images/spa.webp" alt="" />
+                ) : language === "zh" ? (
+                  <img src="images/eng_us.png" alt="" />
+                ) : language === "pt" ? (
+                  <img src="images/pt.png" alt="" />
+                ) : language === "el" ? (
+                  <img src="images/gr.jpg" alt="" />
+                ) : (
+                  <img src="images/eng_us.png" alt="" />
+                )}
+              </span>
+            ) : (
+              <span className="text-xs font-oswald">
+                {media_type === "tv" ? "Serie" : "Película"}
+              </span>
+            )}
+
             <p className="text-xs">{date.substr(0, 4)}</p>
           </div>
         </div>
-      </div>
+      </motion.div>
     </ContentModal>
   );
 };
