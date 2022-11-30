@@ -32,17 +32,21 @@ const SingleContent = ({
           }}
           className="cursor-pointer flex flex-col w-[300px] bg-slate-800 text-white hover:text-black dark:bg-slate-300 p-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
         >
-          {/* <Badge
-            color={
-              vote_average > 7
-                ? "success"
-                : vote_average >= 5
-                ? "primary"
-                : "error"
-            }
-            className="flex justify-end"
-            badgeContent={vote_average.toFixed(1)}
-          /> */}
+          {!vote_average ? (
+            ""
+          ) : (
+            <Badge
+              color={
+                vote_average > 7
+                  ? "success"
+                  : vote_average >= 5
+                  ? "primary"
+                  : "error"
+              }
+              className="flex justify-end"
+              badgeContent={vote_average.toFixed(1)}
+            />
+          )}
 
           <img
             src={poster !== null ? API_IMG + poster : noImage}
