@@ -2,6 +2,7 @@ import { Badge } from "@mui/material";
 import ContentModal from "./ContentModal";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 const API_IMG = "https://image.tmdb.org/t/p/w300/";
 const noImage = "images/noImagen.jpg";
 const SingleContent = ({
@@ -13,9 +14,10 @@ const SingleContent = ({
   vote_average,
   language,
 }) => {
+  const [media, setMedia] = useState(media_type);
   return (
     <ContentModal media_type={media_type} id={id}>
-      <NavLink to={"/" + id}>
+      <NavLink to={"/" + media_type + "/" + id}>
         <motion.div
           initial={{
             x: -500,
@@ -80,7 +82,7 @@ const SingleContent = ({
                 </span>
               )}
 
-              {/* <p className="text-xs">{date.substr(0, 4)}</p> */}
+              <p className="text-xs">{date?.substr(0, 4)}</p>
             </div>
           </div>
         </motion.div>

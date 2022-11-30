@@ -20,7 +20,7 @@ const ContentModal = ({ children, id, media_type }) => {
 
   const fetchData = async () => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES`
+      `https://api.themoviedb.org/3/${media_type}/${id}?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES`
     );
 
     setContent(data);
@@ -29,7 +29,7 @@ const ContentModal = ({ children, id, media_type }) => {
 
   const fetchVideo = async () => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES`
+      `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES`
     );
 
     setVideo(data.results[0]?.key);
@@ -44,7 +44,7 @@ const ContentModal = ({ children, id, media_type }) => {
   return (
     <div>
       <div className="pointer">{children}</div>
-      <Modal
+      {/* <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={open}
@@ -73,7 +73,7 @@ const ContentModal = ({ children, id, media_type }) => {
             </div>
           )}
         </Fade>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

@@ -68,7 +68,7 @@ const MisRutas = () => {
             }
           ></Route>
           <Route
-            path="/:id"
+            path="/:media_type/:id"
             element={
               <Ficha
                 theme={theme}

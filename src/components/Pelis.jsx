@@ -5,6 +5,7 @@ import Title from "./layout/Title";
 import { motion } from "framer-motion";
 import Footer from "./layout/Footer";
 import SingleContent from "./SingleContent";
+import { NavLink } from "react-router-dom";
 
 const API_URL =
   "https://api.themoviedb.org/3/movie/popular?api_key=1976c380dd1c386feb7c2778eef34284&language=es&ES";
@@ -13,14 +14,11 @@ const API_IMG = "https://image.tmdb.org/t/p/w300/";
 const Pelis = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const [content, setContent] = useState([]);
 
-  const fetchPelis = async () => {
-    const { data } = await axios.get(API_URL);
-    setContent(data.results);
-    console.log(data.results);
-  };
-
   useEffect(() => {
-    fetchPelis();
+    fetch(API_URL)
+      .then((res) => res.json())
+      .then((data) => setContent(data.results))
+      .catch((error) => console.log(error));
   }, []);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -38,16 +36,18 @@ const Pelis = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
         <div className="flex flex-wrap mt-10 justify-around w-screen ">
           {content.map((c) => (
             // CAJA
-            <SingleContent
-              key={c.id}
-              id={c.id}
-              poster={c.poster_path}
-              title={c.title || c.name}
-              date={c.first_air_date || c.release_date}
-              media_type={c.media_type}
-              vote_average={c.vote_average}
-              language={c.original_language}
-            />
+            <NavLink to="/:media_type/:id" key={c.id} >
+              <SingleContent
+                key={c.id}
+                id={c.id}
+                poster={c.poster_path}
+                title={c.title || c.name}
+                date={c.first_air_date || c.release_date}
+                media_type="movie"
+                vote_average={c.vote_average}
+                language={c.original_language}
+              />
+            </NavLink>
             // <Button key={popular.id} open={open} onClick={handleOpen}>
             //   <motion.div
             //     initial={{
