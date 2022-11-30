@@ -5,6 +5,8 @@ import Title from "./layout/Title";
 import { FaMoon } from "react-icons/fa";
 import { RiSunFill } from "react-icons/ri";
 import Footer from "./layout/Footer";
+import ContentModal from "./ContentModal";
+import SingleContent from "./SingleContent";
 const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const API =
     "https://api.themoviedb.org/3/trending/all/day?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES";
@@ -21,10 +23,19 @@ const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const [page, setPage] = useState();
 
   const [openModal, setOpenModal] = useState(false);
-  const handleOpen = () => setOpenModal(true);
+  const handleOpen = () => {
+    setOpenModal(true);
+    console.log("abrite puto");
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
+    console.log("cerrate puto");
+  };
+  useEffect(() => {}, [openModal]);
 
   return (
-    <div className="max-w-[1920px] w-screen h-fit">
+    <div className=" w-fit h-fit">
       <div className="p-5 flex-col flex-wrap justify-center bg-slate-500 ">
         <Title
           titulo="Populares"
@@ -34,83 +45,99 @@ const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
           handleSwitch={handleSwitch}
         />
         {content.length > 0 ? (
-          <div className="flex flex-wrap mt-10 ml-6 justify-around  ">
-            {content.map((popular) => (
+          <div className="flex flex-wrap mt-10 justify-around w-screen  ">
+            {content.map((c) => (
               // CAJA
-              <Button key={popular.id} onClick={handleOpen}>
-                <motion.div
-                  initial={{
-                    z: -500,
-                    opacity: 0,
-                    scale: 0.5,
-                  }}
-                  animate={{
-                    z: 0,
-                    opacity: 1,
-                    scale: 1,
-                  }}
-                  transition={{
-                    duration: 1.5,
-                  }}
-                  className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
-                >
-                  {/* <ContentModal
-                   visible={openModal}
-                  children
-                  title={popular.title || popular.name}
-                  poster={popular.poster_path}
-                  overview={popular.overview}
-                />  */}
+              <SingleContent
+                key={c.id}
+                id={c.id}
+                poster={c.poster_path}
+                title={c.title || c.name}
+                date={c.first_air_date || c.release_date}
+                media_type={c.media_type}
+                vote_average={c.vote_average}
+                language={c.original_language}
+              />
+              // <motion.div
+              //   initial={{
+              //     z: -500,
+              //     opacity: 0,
+              //     scale: 0.5,
+              //   }}
+              //   animate={{
+              //     z: 0,
+              //     opacity: 1,
+              //     scale: 1,
+              //   }}
+              //   transition={{
+              //     duration: 1.5,
+              //   }}
+              //   key={popular.id}
+              //   onClick={handleOpen}
+              //   className="cursor-pointer flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
+              // >
+              //   {openModal === true ? (
+              //     <div>
+              //       <ContentModal
+              //         // visible={openModal}
+              //         children
+              //         id={popular.id}
+              //         open={openModal}
+              //         handleClose={handleClose}
+              //       />
+              //     </div>
+              //   ) : (
+              //     ""
+              //   )}
 
-                  <Badge
-                    color={
-                      popular.vote_average > 7
-                        ? "success"
-                        : popular.vote_average >= 5
-                        ? "primary"
-                        : "error"
-                    }
-                    className="flex justify-end"
-                    badgeContent={popular.vote_average.toFixed(1)}
-                  />
-                  <img
-                    src={
-                      popular.poster_path !== null
-                        ? API_IMG + popular.poster_path
-                        : noImage
-                    }
-                    alt={popular.title || popular.name}
-                    className="rounded-t-lg hover:scale-105 "
-                  />
-                  <div className="flex-col space-y-4">
-                    {popular.title != null ? (
-                      <div className="truncate">
-                        <h1 className="text-md font-oswald text-center">
-                          {popular.title}
-                        </h1>
-                        <h1 className="hidden">{popular.name}</h1>
-                      </div>
-                    ) : (
-                      <div className="w-lg overflow-x-hidden">
-                        <h1 className="hidden">{popular.title}</h1>
-                        <h1 className="text-md font-oswald text-center">
-                          {popular.name}
-                        </h1>
-                      </div>
-                    )}
-                    <div className="flex justify-between items-end">
-                      <span className="text-xs font-oswald">
-                        {popular.media_type === "tv" ? "Serie" : "Película"}
-                      </span>
-                      <p className="text-xs">
-                        {popular.first_air_date
-                          ? popular.first_air_date.substr(0, 4)
-                          : popular.release_date.substr(0, 4)}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              </Button>
+              //   <Badge
+              //     color={
+              //       popular.vote_average > 7
+              //         ? "success"
+              //         : popular.vote_average >= 5
+              //         ? "primary"
+              //         : "error"
+              //     }
+              //     className="flex justify-end"
+              //     badgeContent={popular.vote_average.toFixed(1)}
+              //   />
+              //   <img
+              //     src={
+              //       popular.poster_path !== null
+              //         ? API_IMG + popular.poster_path
+              //         : noImage
+              //     }
+              //     alt={popular.title || popular.name}
+              //     className="rounded-t-lg hover:scale-105 "
+              //   />
+              //   <div className="flex-col space-y-4">
+              //     {popular.title != null ? (
+              //       <div className="truncate">
+              //         <h1 className="text-md font-oswald text-center">
+              //           {popular.title}
+              //         </h1>
+              //         <h1 className="hidden">{popular.name}</h1>
+              //       </div>
+              //     ) : (
+              //       <div className="w-lg overflow-x-hidden">
+              //         <h1 className="hidden">{popular.title}</h1>
+              //         <h1 className="text-md font-oswald text-center">
+              //           {popular.name}
+              //         </h1>
+              //       </div>
+              //     )}
+              //     <div className="flex justify-between items-end">
+              //       <span className="text-xs font-oswald">
+              //         {popular.media_type === "tv" ? "Serie" : "Película"}
+              //       </span>
+              //       <p className="text-xs">
+              //         {popular.first_air_date
+              //           ? popular.first_air_date.substr(0, 4)
+              //           : popular.release_date.substr(0, 4)}
+              //       </p>
+              //     </div>
+              //   </div>
+              // </motion.div>
             ))}
             {/* <CustomPagination /> */}
           </div>

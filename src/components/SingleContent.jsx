@@ -1,33 +1,61 @@
-// import { Badge } from "@material-ui/core";
-// import { img_300, unavailable } from "../../config/config";
-// import ContentModal from "../ContentModal/ContentModal";
+import { Badge } from "@mui/material";
+import ContentModal from "./ContentModal";
 
-// const SingleContent = ({
-//   id,
-//   poster,
-//   title,
-//   date,
-//   media_type,
-//   vote_average,
-// }) => {
-//   return (
-//     <ContentModal media_type={media_type} id={id}>
-//       <Badge
-//         badgeContent={vote_average}
-//         color={vote_average > 6 ? "primary" : "secondary"}
-//       />
-//       <img
-//         className="poster"
-//         src={poster ? `${img_300}${poster}` : unavailable}
-//         alt={title}
-//       />
-//       <b className="title">{title}</b>
-//       <span className="subTitle">
-//         {media_type === "tv" ? "TV Series" : "Movie"}
-//         <span className="subTitle">{date}</span>
-//       </span>
-//     </ContentModal>
-//   );
-// };
+const API_IMG = "https://image.tmdb.org/t/p/w300/";
+const noImage = "images/noImagen.jpg";
+const SingleContent = ({
+  id,
+  poster,
+  title,
+  date,
+  media_type,
+  vote_average,
+  language,
+}) => {
+  return (
+    <ContentModal media_type={media_type} id={id}>
+      <div className="cursor-pointer flex flex-col w-[300px] bg-slate-800 text-white dark:bg-slate-300 p-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black">
+        <Badge
+          color={
+            vote_average > 7
+              ? "success"
+              : vote_average >= 5
+              ? "primary"
+              : "error"
+          }
+          className="flex justify-end"
+          badgeContent={vote_average.toFixed(1)}
+        />
 
-// export default SingleContent;
+        <img
+          src={poster !== null ? API_IMG + poster : noImage}
+          alt={title}
+          className="rounded-t-lg "
+        />
+        <div className="flex-col space-y-4">
+          <h1 className="text-md font-oswald text-center truncate">{title}</h1>
+          <div className="flex justify-between items-end">
+            <span className="text-xs w-6 h-5">
+              {language === "en" ? (
+                <img src="images/eng_us.png" alt="" />
+              ) : language === "es" ? (
+                <img src="images/spa.webp" alt="" />
+              ) : language === "zh" ? (
+                <img src="images/eng_us.png" alt="" />
+              ) : language === "pt" ? (
+                <img src="images/pt.png" alt="" />
+              ) : language === "el" ? (
+                <img src="images/gr.jpg" alt="" />
+              ) : (
+                <img src="images/eng_us.png" alt="" />
+              )}
+            </span>
+            <p className="text-xs">{date.substr(0, 4)}</p>
+          </div>
+        </div>
+      </div>
+    </ContentModal>
+  );
+};
+
+export default SingleContent;

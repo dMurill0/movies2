@@ -6,14 +6,27 @@ import { Link, NavLink } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+// import useOnKeyPress from "../hooks/useOnKeyPress";
 const NavBar = () => {
   const [searchText, setSearchText] = useState("");
+  const [submit, setSubmit] = useState("");
   const navigate = useNavigate();
   const handleChange = (e, searchInput) => {
     setSearchText(searchInput);
   };
+
+  // const submitHandler = () => {
+  //   console.log("pasa por aqui");
+  //   setSearchText(searchInput);
+  //   console.log(submit);
+  // };
+  useEffect(() => {
+    console.log(searchText);
+  }, []);
+
+  // useOnKeyPress(submitHandler, "Enter");
   return (
-    <div className="h-[90px] max-w-[1920px] w-screen flex justify-between bg-gradient-to-b from-black to-slate-800 dark:bg-gradient-to-b dark:from-purple-500 dark:to-pink-500 border-2 border-b-slate-300 dark:border-b-slate-800">
+    <div className="h-[90px] flex justify-between bg-gradient-to-b from-black to-slate-800 dark:bg-gradient-to-b dark:from-purple-500 dark:to-pink-500 border-2 border-b-slate-300 dark:border-b-slate-800">
       <motion.div
         initial={{
           x: -500,
@@ -79,6 +92,7 @@ const NavBar = () => {
           type="text"
           id="search"
           onKeyUp={(e) => handleChange(e, e.target.value)}
+          // useOnKeyPress={submitHandler}
           placeholder="Busca una peli o serie"
         />
 
@@ -86,10 +100,8 @@ const NavBar = () => {
           to={"/search/" + searchText}
           type="submit"
           className="dark:text-black mr-6 text-xl text-orange-500"
-
         >
-          <BsSearch
-          />
+          <BsSearch />
         </Link>
       </motion.div>
     </div>

@@ -21,7 +21,7 @@ const Busqueda = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   }, [content]);
 
   return (
-    <div className="max-w-[1920px] w-screen h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
+    <div className="w-fit h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
       <Title
         titulo="Búsqueda"
         theme={theme}
@@ -30,11 +30,11 @@ const Busqueda = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
         handleSwitch={handleSwitch}
       />
       {content.length > 0 ? (
-        <div className="flex flex-wrap mt-10 ml-6 justify-around  ">
+        <div className="flex flex-wrap mt-10 justify-around w-screen ">
           {content.map((popular) => (
             // CAJA
             <Button key={popular.id}>
-              <div className="flex flex-col w-[200px] bg-slate-800 text-white dark:bg-slate-300 p-4 mx-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black">
+              <div className=" flex flex-col w-[300px] bg-slate-800 text-white dark:bg-slate-300 p-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black">
                 {/* <ContentModal
               key={popular.id}
               id={popular.id}
@@ -58,13 +58,13 @@ const Busqueda = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
                   <img
                     src={noImage}
                     alt={popular.title || popular.name}
-                    className="rounded-t-lg hover:scale-105 h-[230px]"
+                    className="rounded-t-lg "
                   />
                 ) : (
                   <img
                     src={API_IMG + popular.poster_path}
                     alt={popular.title || popular.name}
-                    className="rounded-t-lg hover:scale-105 h-[230px]"
+                    className="rounded-t-lg "
                   />
                 )}
 
