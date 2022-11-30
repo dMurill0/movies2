@@ -7,6 +7,7 @@ import { RiSunFill } from "react-icons/ri";
 import Footer from "./layout/Footer";
 import ContentModal from "./ContentModal";
 import SingleContent from "./SingleContent";
+import { NavLink } from "react-router-dom";
 const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const API =
     "https://api.themoviedb.org/3/trending/all/day?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES";
@@ -48,16 +49,16 @@ const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
           <div className="flex flex-wrap mt-10 justify-around w-screen  ">
             {content.map((c) => (
               // CAJA
-              <SingleContent
-                key={c.id}
-                id={c.id}
-                poster={c.poster_path}
-                title={c.title || c.name}
-                date={c.first_air_date || c.release_date}
-                media_type={c.media_type}
-                vote_average={c.vote_average}
-                
-              />
+              <NavLink to="/:id" key={c.id}>
+                <SingleContent
+                  id={c.id}
+                  poster={c.poster_path}
+                  title={c.title || c.name}
+                  date={c.first_air_date || c.release_date}
+                  media_type={c.media_type}
+                  vote_average={c.vote_average}
+                />
+              </NavLink>
               // <motion.div
               //   initial={{
               //     z: -500,

@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { FaMoon } from "react-icons/fa";
 import { RiSunFill } from "react-icons/ri";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import App from "../App";
 import Busqueda from "../components/Busqueda";
 import Error404 from "../components/Error404";
+import Ficha from "../components/Ficha";
 import Footer from "../components/layout/Footer";
 import NavBar from "../components/layout/NavBar";
 import Pelis from "../components/Pelis";
 import Populares from "../components/Populares";
 import Series from "../components/Series";
+import SingleContent from "../components/SingleContent";
 
 const MisRutas = () => {
   const handleSwitch = () => {
@@ -29,6 +31,7 @@ const MisRutas = () => {
     </div>
   );
   const [theme, setTheme] = useState("light");
+  const [id, setId] = useState("");
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
@@ -57,6 +60,17 @@ const MisRutas = () => {
             path="/pelis"
             element={
               <Pelis
+                theme={theme}
+                cursorDark={cursorDark}
+                cursorLight={cursorLight}
+                handleSwitch={handleSwitch}
+              />
+            }
+          ></Route>
+          <Route
+            path="/:id"
+            element={
+              <Ficha
                 theme={theme}
                 cursorDark={cursorDark}
                 cursorLight={cursorLight}
