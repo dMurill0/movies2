@@ -45,7 +45,7 @@ const SingleContent = ({
         <img
           src={poster !== null ? API_IMG + poster : noImage}
           alt={title}
-          className="rounded-t-lg "
+          className="rounded-t-lg hover:opacity-60 "
         />
         <div className="flex-col space-y-4">
           <h1 className="text-xl font-oswald text-center truncate">{title}</h1>

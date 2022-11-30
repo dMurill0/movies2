@@ -22,7 +22,7 @@ const Busqueda = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   }, [content]);
 
   return (
-    <div className="w-fit h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
+    <div className="w-fit h-fit min-h-screen  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
       <Title
         titulo="Búsqueda"
         theme={theme}
@@ -35,15 +35,14 @@ const Busqueda = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
           {content.map((c) => (
             // CAJA
             <SingleContent
-                key={c.id}
-                id={c.id}
-                poster={c.poster_path}
-                title={c.title || c.name}
-                date={c.first_air_date || c.release_date}
-                media_type={c.media_type}
-                vote_average={c.vote_average}
-                
-              />
+              key={c.id}
+              id={c.id}
+              poster={c.poster_path}
+              title={c.title || c.name}
+              date={c.first_air_date || c.release_date}
+              media_type={c.media_type}
+              vote_average={c.vote_average}
+            />
             // <Button key={popular.id}>
             //   <div className=" flex flex-col w-[300px] bg-slate-800 text-white dark:bg-slate-300 p-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black">
             //     <Badge
