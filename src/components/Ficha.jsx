@@ -2,18 +2,22 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { BsCalendar3, BsYoutube } from "react-icons/bs";
+import { SiHbo, SiPrimevideo } from "react-icons/si";
 import { FaImdb } from "react-icons/fa";
 import { BiWorld } from "react-icons/bi";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
 import SingleContent from "./SingleContent";
 import Title from "./layout/Title";
+import { RiNetflixFill } from "react-icons/ri";
 
 const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
   const params = useParams();
   const [identifier, setIdentifier] = useState(params.id);
   const [media, setMedia] = useState(params.media_type);
   const [dato, setDato] = useState([]);
+  const [vid, setVid] = useState([]);
   const API_SRCH = `https://api.themoviedb.org/3/${media}/${identifier}?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES`;
+  const API_VID = `https://api.themoviedb.org/3/${media}/${identifier}/videos?api_key=1976c380dd1c386feb7c2778eef34284`;
   const API_IMG = "https://image.tmdb.org/t/p/w300/";
   const noImage = "/public/images/noImagen.jpg";
 
@@ -22,10 +26,16 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
     setDato(data);
     console.log(data);
   };
-
+  const fetchVideo = async () => {
+    const { data } = await axios.get(API_VID);
+    setVid(data.results[0]?.key);
+    console.log("datos de video " + vid);
+  };
   useEffect(() => {
     fetchId();
+    fetchVideo();
   }, []);
+
   return (
     <div className="h-fit w-screen bg-slate-500 p-6">
       <Title
@@ -89,15 +99,31 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
               alt={dato.title || dato.name}
               className="rounded-t-lg mx-auto"
             />
-            {/* {media === "movie" || !dato.networks === [] ? (
-              ""
-            ) : dato.networks === 0  ? (
-              ""
-            ) : (
-              <p className="flex items-center justify-center">
-                <LiveTvIcon className="mr-2" /> {dato.networks[0].name}
-              </p>
-            )} */}
+            {dato.networks && (
+              <span className="flex items-center justify-center">
+                {dato.networks[0].name === "Netflix" ? (
+                  <RiNetflixFill color="red" className="text-3xl" />
+                ) : dato.networks[0].name === "Amazon" ? (
+                  <SiPrimevideo className="text-3xl" />
+                ) : dato.networks[0].name === "Disney+" ? (
+                  <img
+                    className="text-xl"
+                    src="https://icon.horse/icon/www.disneyplus.com"
+                    alt=""
+                  />
+                ) : dato.networks[0].name === "HBO" ? (
+                  <SiHbo className="text-3xl" />
+                ) : (
+                  <p className="flex items-center justify-center">
+                    <LiveTvIcon className="mr-2" /> {dato.networks[0].name}
+                  </p>
+                )}
+              </span>
+
+              // <p className="flex items-center justify-center">
+              //   <LiveTvIcon className="mr-2" /> {dato.networks[0].name}
+              // </p>
+            )}
 
             {!dato.overview ? (
               <h3 className="p-4 rounded-lg font-oswald bg-slate-100 w-2/3 mx-auto">
@@ -110,10 +136,24 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
             )}
 
             <div className="flex justify-between">
-              <div className="flex w-1/3 space-x-3 items-center ">
-                <p>Ver tráiler</p>
-                <BsYoutube color="red" className="text-3xl cursor-pointer" />
-              </div>
+              <a
+                href={`https://www.youtube.com/watch?v=${vid}`}
+                target="_blank"
+              >
+                <div className="flex w-1/3 space-x-3 items-center ">
+                  <BsYoutube
+                    color="red"
+                    className="text-4xl cursor-pointer"
+                    size="80px"
+                  />
+                </div>
+              </a>
+              {/* <iframe
+                hidden
+                width="42"
+                height="31"
+                src={`https://www.youtube.com/embed/${vid}`}
+              ></iframe> */}
               <div className="flex w-1/3 space-x-1 items-center justify-center">
                 <p>Web</p>
                 <a href={dato.homepage} target="_blank">
@@ -144,7 +184,7 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
             </div>
             <NavLink
               to="/"
-              className="mt-6 bg-slate-500 w-[80px] rounded-lg p-2 mx-auto uppercase "
+              className="mt-6 bg-slate-800 text-white dark:text-black dark:bg-pink-400 w-[80px] rounded-lg p-2 mx-auto uppercase "
             >
               Volver
             </NavLink>
