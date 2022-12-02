@@ -35,8 +35,8 @@ const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   
 
   return (
-    <div className=" w-fit h-fit">
-      <div className="p-5 flex-col flex-wrap justify-center bg-slate-500 ">
+    <div className="max-w-fit w-fit h-fit bg-slate-500">
+      <div className="p-5 flex-col flex-wrap justify-center  ">
         <Title
           titulo="Populares"
           theme={theme}

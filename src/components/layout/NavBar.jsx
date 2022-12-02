@@ -15,17 +15,9 @@ const NavBar = () => {
     setSearchText(searchInput);
   };
 
-  // const submitHandler = () => {
-  //   console.log("pasa por aqui");
-  //   setSearchText(searchInput);
-  //   console.log(submit);
-  // };
-  useEffect(() => {
-    console.log(searchText);
-  }, []);
+  useEffect(() => {}, []);
 
-  // useOnKeyPress(submitHandler, "Enter");
-  return (
+  return(
     <div className="h-[90px] flex justify-between bg-gradient-to-b from-black to-slate-800 dark:bg-gradient-to-b dark:from-purple-500 dark:to-pink-500 border-2 border-b-slate-300 dark:border-b-slate-800">
       <motion.div
         initial={{
@@ -91,8 +83,20 @@ const NavBar = () => {
           className="rounded-lg p-1 font-oswald text-md mx-2"
           type="text"
           id="search"
+          name="search"
           onKeyUp={(e) => handleChange(e, e.target.value)}
-          // useOnKeyPress={submitHandler}
+          onKeyPress={(e) => {
+            document
+              .getElementById("search")
+              .addEventListener("keyup", function (event) {
+                event.preventDefault();
+                if (event.keyCode === 13) {
+                  document.getElementById("search").click();
+                  setSearchText(event.target.value);
+                  navigate("/search/" + searchText);
+                }
+              });
+          }}
           placeholder="Busca una peli o serie"
         />
 
