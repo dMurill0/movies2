@@ -9,7 +9,6 @@ const Busqueda = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const API_SRCH =
     "https://api.themoviedb.org/3/search/multi?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES&query=";
   const API_IMG = "https://image.tmdb.org/t/p/w300/";
-  const noImage = "images/noImagen.jpg";
   const { query } = useParams();
   const [content, setContent] = useState([]);
 
@@ -43,64 +42,6 @@ const Busqueda = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
               media_type={c.media_type}
               vote_average={c.vote_average}
             />
-            // <Button key={popular.id}>
-            //   <div className=" flex flex-col w-[300px] bg-slate-800 text-white dark:bg-slate-300 p-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black">
-            //     <Badge
-            //       color={
-            //         popular.vote_average > 7
-            //           ? "success"
-            //           : popular.vote_average >= 5
-            //           ? "primary"
-            //           : "error"
-            //       }
-            //       className="flex justify-end"
-            //       badgeContent={popular.vote_average}
-            //     />
-            //     {!popular.poster_path || popular.poster_path === null ? (
-            //       <img
-            //         src={noImage}
-            //         alt={popular.title || popular.name}
-            //         className="rounded-t-lg "
-            //       />
-            //     ) : (
-            //       <img
-            //         src={API_IMG + popular.poster_path}
-            //         alt={popular.title || popular.name}
-            //         className="rounded-t-lg "
-            //       />
-            //     )}
-
-            //     <div className="flex-col space-y-4">
-            //       {popular.title != null ? (
-            //         <div className="">
-            //           <h1 className="text-md font-oswald text-center truncate">
-            //             {popular.title}
-            //           </h1>
-            //           <h1 className="hidden ">{popular.name}</h1>
-            //         </div>
-            //       ) : (
-            //         <div className="w-lg overflow-x-hidden">
-            //           <h1 className="hidden">{popular.title}</h1>
-            //           <h1 className="text-md font-oswald text-center truncate">
-            //             {popular.name}
-            //           </h1>
-            //         </div>
-            //       )}
-            //       <div className="flex justify-between items-end">
-            //         <span className="text-xs">
-            //           {popular.media_type === "tv" ? "Serie" : "Película"}
-            //         </span>
-            //         <p className="text-xs">
-            //           {!popular.first_air_date && !popular.release_date
-            //             ? ""
-            //             : popular.first_air_date
-            //             ? popular.first_air_date.substr(0, 4)
-            //             : popular.release_date.substr(0, 4)}
-            //         </p>
-            //       </div>
-            //     </div>
-            //   </div>
-            // </Button>
           ))}
           {/* <CustomPagination /> */}
         </div>

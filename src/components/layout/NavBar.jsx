@@ -33,11 +33,11 @@ const NavBar = () => {
         transition={{
           duration: 1,
         }}
-        className="flex w-fit items-center h-fit justify-start  sm:space-x-2 md:space-x-3 lg:space-x-5 text-white dark:text-black mt-8 ml-4"
+        className="uppercase flex w-fit items-center h-fit justify-start  sm:space-x-2 md:space-x-3 lg:space-x-5 text-white dark:text-black mt-8 ml-4"
       >
         <NavLink
           to="/"
-          className="dark:[&.active]:text-black [&.active]:text-orange-400 text-white hidden sm:block font-oswald font-semibold text-md md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500 active:text-orange-500 dark:active:text-slate-400'"
+          className="dark:[&.active]:text-black [&.active]:text-orange-400 text-white hidden sm:block sm:text-md font-oswald font-semibold text-md md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500 active:text-orange-500 dark:active:text-slate-400'"
         >
           Inicio
         </NavLink>

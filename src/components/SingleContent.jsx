@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 const API_IMG = "https://image.tmdb.org/t/p/w300/";
-const noImage = "images/noImagen.jpg";
+const noImage = "/public/images/noImagen.jpg";
 const SingleContent = ({
   id,
   poster,
@@ -51,7 +51,7 @@ const SingleContent = ({
           )}
 
           <img
-            src={poster !== null ? API_IMG + poster : noImage}
+            src={poster ? API_IMG + poster : noImage}
             alt={title}
             className="rounded-t-lg hover:opacity-60 "
           />
