@@ -4,11 +4,12 @@ import { NavLink, useParams } from "react-router-dom";
 import { BsCalendar3, BsYoutube } from "react-icons/bs";
 import { SiHbo, SiPrimevideo } from "react-icons/si";
 import { FaImdb } from "react-icons/fa";
-import { BiWorld } from "react-icons/bi";
+import { BiTimeFive, BiWorld } from "react-icons/bi";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
 import SingleContent from "./SingleContent";
 import Title from "./layout/Title";
 import { RiNetflixFill } from "react-icons/ri";
+import { DataObjectSharp } from "@mui/icons-material";
 
 const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
   const params = useParams();
@@ -16,8 +17,12 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
   const [media, setMedia] = useState(params.media_type);
   const [dato, setDato] = useState([]);
   const [vid, setVid] = useState([]);
+  const [horas, setHoras] = useState("");
+  const [minutos, setMinutos] = useState("");
+  const [categoria, setCategoria] = useState([]);
   const API_SRCH = `https://api.themoviedb.org/3/${media}/${identifier}?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES`;
   const API_VID = `https://api.themoviedb.org/3/${media}/${identifier}/videos?api_key=1976c380dd1c386feb7c2778eef34284`;
+  const API_GENRES = `https://api.themoviedb.org/3/genre/${media}/list?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES`;
   const API_IMG = "https://image.tmdb.org/t/p/w300/";
   const noImage = "/public/images/noImagen.jpg";
 
@@ -31,13 +36,28 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
     setVid(data.results[0]?.key);
     console.log("datos de video " + vid);
   };
+
+  // const fetchGenres = async () => {
+  //   const { data } = await axios.get(API_GENRES);
+  //   setCategoria(data.genres);
+  //   console.log("categorias " + categoria);
+  // };
   useEffect(() => {
     fetchId();
     fetchVideo();
+    // fetchGenres();
+    fetchTime();
   }, []);
 
+  const fetchTime = () => {
+    setHoras(dato.runtime / 60);
+    console.log("horas: " + horas);
+    setMinutos(dato.runtime / 0x3c);
+    console.log("minutos: " + minutos);
+  };
+
   return (
-    <div className="h-fit w-screen bg-slate-500 p-6">
+    <div className="h-fit w-screen bg-slate-500 p-6 font-oswald">
       <Title
         titulo="Ficha"
         theme={theme}
@@ -119,12 +139,26 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
                   </p>
                 )}
               </span>
-
-              // <p className="flex items-center justify-center">
-              //   <LiveTvIcon className="mr-2" /> {dato.networks[0].name}
-              // </p>
             )}
 
+            {/* DURACION DE PELICULAS */}
+            {media === "movie" && (
+              <span className="flex items-center justify-center">
+                <BiTimeFive /> {(dato.runtime/60).toFixed(0)} h {dato.runtime % 60} min
+              </span>
+            )}
+            <div className="flex justify-center space-x-2 font-sans ">
+              {dato.genres &&
+                dato.genres.map((cat) => (
+                  <p
+                    className="bg-slate-500 rounded-lg text-xs p-2"
+                    key={cat.id}
+                  >
+                    {cat.name}
+                  </p>
+                ))}
+            </div>
+            {/* SINOPSIS, RESUMEN */}
             {!dato.overview ? (
               <h3 className="p-4 rounded-lg font-oswald bg-slate-100 w-2/3 mx-auto">
                 No hay información
@@ -135,7 +169,7 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
               </h3>
             )}
 
-            <div className="flex justify-between">
+            <div className="flex justify-evenly">
               <a
                 href={`https://www.youtube.com/watch?v=${vid}`}
                 target="_blank"
@@ -160,7 +194,6 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
                   <BiWorld color="white" className="text-2xl cursor-pointer" />
                 </a>
               </div>
-
               {!dato.vote_average ? (
                 ""
               ) : (
