@@ -3,6 +3,7 @@ import { FaMoon } from "react-icons/fa";
 import { RiSunFill } from "react-icons/ri";
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import App from "../App";
+import Anime from "../components/Anime";
 import Busqueda from "../components/Busqueda";
 import Error404 from "../components/Error404";
 import Ficha from "../components/Ficha";
@@ -82,6 +83,17 @@ const MisRutas = () => {
             path="/series"
             element={
               <Series
+                theme={theme}
+                cursorDark={cursorDark}
+                cursorLight={cursorLight}
+                handleSwitch={handleSwitch}
+              />
+            }
+          ></Route>
+          <Route
+            path="/anime"
+            element={
+              <Anime
                 theme={theme}
                 cursorDark={cursorDark}
                 cursorLight={cursorLight}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaHome } from "react-icons/fa";
 import { HiFilm } from "react-icons/hi";
-import { SiHbo } from "react-icons/si";
+import { SiHbo, SiTvtime } from "react-icons/si";
 import { Link, NavLink } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -61,6 +61,15 @@ const NavBar = () => {
         </NavLink>
         <NavLink to="/series">
           <SiHbo className=" sm:hidden text-2xl text-white hover:text-orange-500 dark:hover:text-white dark:text-black mr-4 items-center" />
+        </NavLink>
+        <NavLink
+          to="/anime"
+          className="dark:[&.active]:text-black [&.active]:text-orange-400 text-white hidden sm:block font-oswald font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500 "
+        >
+          Animes
+        </NavLink>
+        <NavLink to="/anime">
+          <SiTvtime className=" sm:hidden text-2xl text-white hover:text-orange-500 dark:hover:text-white dark:text-black mr-4 items-center" />
         </NavLink>
       </motion.div>
       <motion.div

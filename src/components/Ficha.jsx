@@ -24,7 +24,7 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
   const API_VID = `https://api.themoviedb.org/3/${media}/${identifier}/videos?api_key=1976c380dd1c386feb7c2778eef34284`;
   const API_GENRES = `https://api.themoviedb.org/3/genre/${media}/list?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES`;
   const API_IMG = "https://image.tmdb.org/t/p/w300/";
-  const noImage = "/public/images/noImagen.jpg";
+  const noImage = "/images/noImagen.jpg";
 
   const fetchId = async () => {
     const { data } = await axios.get(API_SRCH);
@@ -144,7 +144,8 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
             {/* DURACION DE PELICULAS */}
             {media === "movie" && (
               <span className="flex items-center justify-center">
-                <BiTimeFive /> {(dato.runtime/60).toFixed(0)} h {dato.runtime % 60} min
+                <BiTimeFive /> {(dato.runtime / 60).toFixed(0)} h{" "}
+                {dato.runtime % 60} min
               </span>
             )}
             <div className="flex justify-center space-x-2 font-sans ">

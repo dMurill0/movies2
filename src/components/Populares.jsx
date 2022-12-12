@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Badge, Button } from "@mui/material";
-import { motion } from "framer-motion";
 import Title from "./layout/Title";
-import { FaMoon } from "react-icons/fa";
-import { RiSunFill } from "react-icons/ri";
 import Footer from "./layout/Footer";
-import ContentModal from "./ContentModal";
 import SingleContent from "./SingleContent";
 import { NavLink } from "react-router-dom";
 const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
@@ -26,7 +21,6 @@ const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const [openModal, setOpenModal] = useState(false);
   const handleOpen = () => {
     setOpenModal(true);
-    console.log("abrite puto");
   };
 
   const handleClose = () => {
