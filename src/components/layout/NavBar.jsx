@@ -18,7 +18,7 @@ const NavBar = () => {
   useEffect(() => {}, []);
 
   return(
-    <div className="h-[90px] flex justify-between bg-gradient-to-b from-black to-slate-800 dark:bg-gradient-to-b dark:from-purple-500 dark:to-pink-500 border-2 border-b-slate-300 dark:border-b-slate-800">
+    <div className="h-[90px] flex justify-between bg-gradient-to-b  from-black to-slate-800 dark:bg-gradient-to-b dark:from-purple-500 dark:to-pink-500 border-2 border-b-slate-300 dark:border-b-slate-800">
       <motion.div
         initial={{
           x: -500,
@@ -37,25 +37,25 @@ const NavBar = () => {
       >
         <NavLink
           to="/"
-          className="dark:[&.active]:text-black [&.active]:text-orange-400 text-white hidden sm:block sm:text-md font-oswald font-semibold text-md md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500 active:text-orange-500 dark:active:text-slate-400'"
+          className="dark:[&.active]:text-white dark:text-black [&.active]:text-orange-400 text-white hidden sm:block sm:text-md font-oswald font-semibold text-md md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500 active:text-orange-500 dark:active:text-slate-400'"
         >
           Inicio
         </NavLink>
         <NavLink to="/">
-          <FaHome className="  sm:hidden text-2xl text-white hover:text-orange-500 dark:hover:text-white dark:text-black mr-4 items-center" />
+          <FaHome className="dark:[&.active]:text-white dark:text-black  sm:hidden text-2xl text-white hover:text-orange-500 dark:hover:text-white  mr-4 items-center" />
         </NavLink>
         <NavLink
           to="/pelis"
-          className="dark:[&.active]:text-black [&.active]:text-orange-400 text-white hidden sm:block font-oswald font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500 "
+          className="dark:[&.active]:text-white dark:text-black [&.active]:text-orange-400 text-white hidden sm:block font-oswald font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500 "
         >
           Películas
         </NavLink>
         <NavLink to="/pelis">
-          <HiFilm className=" sm:hidden text-2xl text-white hover:text-orange-500 dark:hover:text-white dark:text-black mr-4 items-center" />
+          <HiFilm className="dark:[&.active]:text-white dark:text-black sm:hidden text-2xl text-white hover:text-orange-500 dark:hover:text-white  mr-4 items-center" />
         </NavLink>
         <NavLink
           to="/series"
-          className="dark:[&.active]:text-black [&.active]:text-orange-400 text-white hidden sm:block font-oswald font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500 "
+          className="dark:[&.active]:text-white dark:text-black [&.active]:text-orange-400 text-white hidden sm:block font-oswald font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500 "
         >
           Series
         </NavLink>
@@ -64,7 +64,7 @@ const NavBar = () => {
         </NavLink>
         <NavLink
           to="/anime"
-          className="dark:[&.active]:text-black [&.active]:text-orange-400 text-white hidden sm:block font-oswald font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500 "
+          className="dark:[&.active]:text-white dark:text-black [&.active]:text-orange-400 text-white hidden sm:block font-oswald font-semibold text-sm md:text-lg lg:text-xl dark:hover:text-white hover:text-orange-500 "
         >
           Animes
         </NavLink>

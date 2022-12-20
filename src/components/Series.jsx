@@ -7,6 +7,7 @@ import { FaMoon } from "react-icons/fa";
 import { RiSunFill } from "react-icons/ri";
 import Footer from "./layout/Footer";
 import SingleContent from "./SingleContent";
+import CustomPagination from "./layout/CustomPagination";
 const API_URL_TV =
   "https://api.themoviedb.org/3/tv/popular?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES";
 const API_IMG = "https://image.tmdb.org/t/p/w300/";
@@ -54,6 +55,7 @@ const Series = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
       ) : (
         <h2></h2>
       )}
+      <CustomPagination />
       <Footer />
     </div>
   );

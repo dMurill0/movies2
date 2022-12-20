@@ -34,7 +34,6 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
   const fetchVideo = async () => {
     const { data } = await axios.get(API_VID);
     setVid(data.results[0]?.key);
-    console.log("datos de video " + vid);
   };
 
   // const fetchGenres = async () => {
@@ -51,9 +50,7 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
 
   const fetchTime = () => {
     setHoras(dato.runtime / 60);
-    console.log("horas: " + horas);
     setMinutos(dato.runtime / 0x3c);
-    console.log("minutos: " + minutos);
   };
 
   return (
@@ -73,12 +70,12 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
         //   date={dato.first_air_date || dato.release_date}
         //   media_type={dato.media_type}
         // />
-        <div className="bg-slate-500 sm:w-1/2 md:w-1/3 p-4 m-4 min-h-screen h-fit font-oswald sm:bg-slate-400 space-y-3 flex flex-col flex-wrap justify-center text-center mt-20 mx-auto">
-          <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-oswald font-bold mx-auto truncate...">
+        <div className="bg-slate-500  sm:w-1/2 md:w-1/3 p-4 m-4 min-h-screen h-fit font-oswald sm:bg-slate-400 space-y-3 flex flex-col flex-wrap justify-center text-center mt-20 mx-auto">
+          <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-oswald font-bold mx-auto truncate... uppercase">
             {dato.title || dato.name}
           </h1>
           <div className="flex font-oswald w-full justify-evenly">
-            <div className="flex space-x-2 items-center">
+            <div className="flex space-x-2 items-center bg-slate-300 rounded-2xl p-2">
               <BsCalendar3 />
               {!dato.first_air_date && !dato.release_date ? (
                 ""
@@ -144,7 +141,7 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
             {/* DURACION DE PELICULAS */}
             {media === "movie" && (
               <span className="flex items-center justify-center">
-                <BiTimeFive /> {(dato.runtime / 60).toFixed(0)} h{" "}
+                <BiTimeFive /> {(dato.runtime / 60 - 1).toFixed(0)} h{" "}
                 {dato.runtime % 60} min
               </span>
             )}
