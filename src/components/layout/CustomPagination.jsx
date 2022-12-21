@@ -20,6 +20,7 @@ const CustomPagination = ({ setPage, numOfPages = 10 }) => {
         count={numOfPages}
         color="secondary"
         size="large"
+        
         hideNextButton
         hidePrevButton
       />

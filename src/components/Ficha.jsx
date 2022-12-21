@@ -92,7 +92,7 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
           {/* INFO */}
           <div className="w-1/2 space-y-6">
             <div className="flex justify-between">
-              <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-oswald font-bold mx-auto truncate... uppercase">
+              <h1 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-oswald font-bold mx-auto truncate... uppercase">
                 {dato.title || dato.name}
               </h1>
 
@@ -181,11 +181,11 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
               <div className="flex flex-col justify-center align-top">
                 {media === "movie" && (
                   <span className="flex items-center justify-center">
-                    <BiTimeFive /> {(dato.runtime / 60).toFixed(0)} h{" "}
+                    <BiTimeFive /> {((dato.runtime / 60)-0.5).toFixed(0)} h{" "}
                     {dato.runtime % 60} min
                   </span>
                 )}
-
+                
                 {/* IMDB */}
                 {!dato.vote_average ? (
                   ""
