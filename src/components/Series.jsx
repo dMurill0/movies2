@@ -10,22 +10,28 @@ import SingleContent from "./SingleContent";
 import CustomPagination from "./layout/CustomPagination";
 const API_URL_TV =
   "https://api.themoviedb.org/3/tv/popular?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES";
+const API_PAGINATION = `https://api.themoviedb.org/3/discover/tv?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page=2`;
 const API_IMG = "https://image.tmdb.org/t/p/w300/";
 
 const Series = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const [content, setContent] = useState([]);
-
+  const [page, setPage] = useState(1);
+  const [numOfPages, setNumOfPages] = useState();
+  const [open, setOpen] = useState(false);
   const fetchSeries = async () => {
-    const { data } = await axios.get(API_URL_TV);
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/discover/tv?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}`
+    );
     setContent(data.results);
+    setNumOfPages(data.total_pages);
     console.log(data.results);
   };
 
   useEffect(() => {
+    window.scroll(0, 0);
     fetchSeries();
-  }, []);
+  }, [page]);
 
-  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   return (
     <div className=" w-fit h-fit max-w-2/3  p-5 flex flex-col flex-wrap bg-slate-500">
@@ -55,7 +61,9 @@ const Series = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
       ) : (
         <h2></h2>
       )}
-      <CustomPagination />
+      {numOfPages > 1 && (
+        <CustomPagination setPage={setPage} numOfPages={numOfPages} />
+      )}
       <Footer />
     </div>
   );
