@@ -78,7 +78,7 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
         //   date={dato.first_air_date || dato.release_date}
         //   media_type={dato.media_type}
         // />
-        <div className=" min-h-screen h-fit font-oswald mt-20 flex flex-wrap justify-center text-center mx-auto">
+        <div className=" min-h-screen h-fit font-oswald md:mt-12 flex flex-wrap justify-center text-center mx-auto">
           {/* POSTER */}
           <div className="w-1/2 ">
             <img
@@ -86,11 +86,11 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
                 dato.poster_path !== null ? API_IMG + dato.poster_path : noImage
               }
               alt={dato.title || dato.name}
-              className="rounded-t-lg mx-auto h-full shadow-2xl"
+              className="rounded-t-lg mx-auto h-full shadow-2xl hidden md:block"
             />
           </div>
           {/* INFO */}
-          <div className="w-1/2 space-y-6">
+          <div className="w-full md:w-1/2 space-y-6">
             <div className="flex justify-between">
               <h1 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-oswald font-bold mx-auto truncate... uppercase">
                 {dato.title || dato.name}
