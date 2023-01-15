@@ -7,6 +7,8 @@ import Footer from "./layout/Footer";
 import SingleContent from "./SingleContent";
 import { NavLink } from "react-router-dom";
 import CustomPagination from "./layout/CustomPagination";
+import Categorias from "./Categorias";
+import useGenre from "../hooks/useGenre";
 
 const API_URL =
   "https://api.themoviedb.org/3/movie/popular?api_key=1976c380dd1c386feb7c2778eef34284&language=es&ES";
@@ -14,20 +16,25 @@ const API_IMG = "https://image.tmdb.org/t/p/w300/";
 
 const Pelis = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const [content, setContent] = useState([]);
+  const [genres, setGenres] = useState([]);
+  const [selectedGenres, setSelectedGenres] = useState([]);
   const [page, setPage] = useState(1);
   const [numOfPages, setNumOfPages] = useState();
   const [open, setOpen] = useState(false);
+  const genreforURL = useGenre(selectedGenres);
+  const fetchMovies = async () => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/discover/movie?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
+    );
+    setContent(data.results);
+    setNumOfPages(data.total_pages);
+  };
+
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setContent(data.results);
-        setNumOfPages(data.total_pages);
-      })
-      .catch((error) => console.log(error));
-  }, [page]);
+    window.scroll(0, 0);
+    fetchMovies();
+    // eslint-disable-next-line
+  }, [genreforURL, page]);
 
   const handleOpen = () => setOpen(true);
 
@@ -39,6 +46,14 @@ const Pelis = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
         cursorDark={cursorDark}
         cursorLight={cursorLight}
         handleSwitch={handleSwitch}
+      />
+      <Categorias
+      type="movie"
+        selectedGenres={selectedGenres}
+        setSelectedGenres={setSelectedGenres}
+        genres={genres}
+        setGenres={setGenres}
+        setPage={setPage}
       />
       {content.length > 0 ? (
         <div className="flex flex-wrap mt-10 justify-around w-screen ">
