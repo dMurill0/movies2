@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { BsCalendar3, BsYoutube } from "react-icons/bs";
 import { SiHbo, SiPrimevideo } from "react-icons/si";
 import { FaImdb } from "react-icons/fa";
@@ -27,7 +27,7 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
   const API_GENRES = `https://api.themoviedb.org/3/genre/${media}/list?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES`;
   const API_IMG = "https://image.tmdb.org/t/p/w300/";
   const noImage = "/images/noImagen.jpg";
-
+  const history = useNavigate();
   const fetchId = async () => {
     const { data } = await axios.get(API_SRCH);
     setDato(data);
@@ -181,11 +181,11 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
               <div className="flex flex-col justify-center align-top">
                 {media === "movie" && (
                   <span className="flex items-center justify-center">
-                    <BiTimeFive /> {((dato.runtime / 60)-0.5).toFixed(0)} h{" "}
+                    <BiTimeFive /> {(dato.runtime / 60 - 0.5).toFixed(0)} h{" "}
                     {dato.runtime % 60} min
                   </span>
                 )}
-                
+
                 {/* IMDB */}
                 {!dato.vote_average ? (
                   ""
@@ -264,12 +264,15 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
                   </a>
                 </div>
               </div>
-              <NavLink
+              <button
+                onClick={() => {
+                  history(-1);
+                }}
                 to="/"
                 className="mt-6 bg-slate-800 text-white dark:text-black dark:bg-pink-400 w-[80px] rounded-lg p-2 mx-auto uppercase "
               >
                 Volver
-              </NavLink>
+              </button>
             </div>
           </div>
         </div>
