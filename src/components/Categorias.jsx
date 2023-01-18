@@ -42,7 +42,7 @@ function Categorias({
   }, []);
 
   return (
-    <div style={{ padding: "6px 0" }} >
+    <div style={{ padding: "6px 0" }} className="py-2 bg-slate-400 dark:bg-slate-300 rounded-lg mt-12 w-5/6 mx-auto text-white">
       {selectedGenres.map((genre) => (
         <Chip 
           style={{ margin: 2 }}
@@ -61,6 +61,7 @@ function Categorias({
           key={genre.id}
           clickable
           size="small"
+          color="default"
           onClick={() => handleAdd(genre)}
         />
       ))}
