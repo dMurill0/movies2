@@ -264,8 +264,9 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
                   <Modal open={open} onClose={handleClose}>
                     <div className="w-fit h-fit my-20 mx-auto">
                       <iframe
-                        width="620"
-                        height="410"
+                      className="absolute left-[10%]"
+                        width={"80%"}
+                        height={"70%"}
                         src={`https://www.youtube.com/embed/${vid}`}
                       ></iframe>
                     </div>
