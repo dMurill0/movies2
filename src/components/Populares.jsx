@@ -28,7 +28,7 @@ const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   };
 
   return (
-    <div className=" w-fit h-fit bg-slate-500">
+    <div className="max-w-[1490px] w-fit h-fit max-w-2/3  p-5 flex flex-col flex-wrap bg-slate-500 mx-auto">
       <div className="p-5 flex-col flex-wrap justify-center  ">
         <Title
           titulo="Populares"
@@ -38,7 +38,7 @@ const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
           handleSwitch={handleSwitch}
         />
         {content.length > 0 ? (
-          <div className="flex flex-wrap mt-10 justify-around w-screen  max-w-[1490px]">
+          <div className="flex flex-wrap mt-10 justify-around">
             {content.map((c) => (
               // CAJA
               <NavLink to="/:media_type/:id" key={c.id}>

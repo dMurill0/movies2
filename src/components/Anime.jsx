@@ -29,7 +29,7 @@ const Anime = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   return (
-    <div className=" max-w-[1490px] w-fit h-fit max-w-2/3  p-5 flex flex-col flex-wrap bg-slate-500">
+    <div className="max-w-[1490px] w-fit h-fit p-5 flex-col flex-wrap justify-center bg-slate-500 mx-auto">
       <Title
         titulo="Animes"
         theme={theme}
@@ -38,7 +38,7 @@ const Anime = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
         handleSwitch={handleSwitch}
       />
       {content.length > 0 ? (
-        <div className="flex flex-wrap mt-10 justify-around ">
+        <div className="flex flex-wrap mt-10 justify-around">
           {content.map((c) => (
             // CAJA
 

@@ -39,7 +39,7 @@ const Series = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
 
   const handleOpen = () => setOpen(true);
   return (
-    <div className="max-w-[1490px] w-fit h-fit max-w-2/3  p-5 flex flex-col flex-wrap bg-slate-500">
+    <div className="max-w-[1490px] w-fit h-fit max-w-2/3  p-5 flex flex-col flex-wrap bg-slate-500 mx-auto">
       <Title
         titulo="Series"
         theme={theme}
