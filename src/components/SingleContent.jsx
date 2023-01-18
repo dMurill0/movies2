@@ -2,7 +2,7 @@ import { Badge } from "@mui/material";
 import ContentModal from "./ContentModal";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const API_IMG = "https://image.tmdb.org/t/p/w300/";
 const noImage = "/public/images/noImagen.jpg";
 const SingleContent = ({
@@ -15,6 +15,13 @@ const SingleContent = ({
   language,
 }) => {
   const [media, setMedia] = useState(media_type);
+  const [puntuacion, setPuntuacion] = useState(vote_average);
+
+  useEffect(() => {
+    setPuntuacion(vote_average - vote_average.toFixed(1));
+    console.log(vote_average - vote_average.toFixed(1));
+  }, [vote_average]);
+
   return (
     <ContentModal media_type={media_type} id={id}>
       <NavLink to={"/" + media_type + "/" + id}>
@@ -36,6 +43,18 @@ const SingleContent = ({
         >
           {!vote_average ? (
             ""
+          ) : puntuacion === 0 ? (
+            <Badge
+              color={
+                vote_average > 7
+                  ? "success"
+                  : vote_average >= 5
+                  ? "primary"
+                  : "error"
+              }
+              className="flex justify-end"
+              badgeContent={vote_average}
+            />
           ) : (
             <Badge
               color={
