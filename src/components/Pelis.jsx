@@ -39,7 +39,7 @@ const Pelis = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const handleOpen = () => setOpen(true);
 
   return (
-    <div className="max-w-fit w-fit h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
+    <div className="max-w-[1490px] w-fit h-fit  p-5 flex-col flex-wrap justify-center bg-slate-500 ">
       <Title
         titulo="Películas"
         theme={theme}

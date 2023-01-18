@@ -18,7 +18,7 @@ const NavBar = () => {
   useEffect(() => {}, []);
 
   return(
-    <div className="h-[90px] flex justify-between bg-gradient-to-b  from-black to-slate-800 dark:bg-gradient-to-b dark:from-purple-500 dark:to-pink-500 border-2 border-b-slate-300 dark:border-b-slate-800">
+    <div className="h-[90px] flex justify-around bg-gradient-to-b  from-black to-slate-800 dark:bg-gradient-to-b dark:from-purple-500 dark:to-pink-500 border-2 border-b-slate-300 dark:border-b-slate-800">
       <motion.div
         initial={{
           x: -500,
@@ -86,7 +86,7 @@ const NavBar = () => {
         transition={{
           duration: 1,
         }}
-        className="flex space-x-2  mr-8 h-1/3 items-center  mt-8"
+        className="flex space-x-2  h-1/3 items-center  mt-8"
       >
         <input
           className="rounded-lg p-1 font-oswald text-md mx-2"
