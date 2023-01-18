@@ -11,6 +11,7 @@ import Title from "./layout/Title";
 import { RiNetflixFill } from "react-icons/ri";
 import { DataObjectSharp } from "@mui/icons-material";
 import { Backdrop, Badge, Modal } from "@mui/material";
+import { unavailable } from "../config/config";
 
 const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
   const params = useParams();
@@ -44,7 +45,6 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
     fetchVideo();
     if (dato.vote_average > 0) {
       setPuntuacion(dato.vote_average - dato.vote_average.toFixed(1));
-      console.log(dato.vote_average - dato.vote_average.toFixed(1));
     }
 
     // fetchGenres();
@@ -84,7 +84,7 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
           <div className="w-1/2 ">
             <img
               src={
-                dato.poster_path !== null ? API_IMG + dato.poster_path : noImage
+                dato.poster_path !== null ? API_IMG + dato.poster_path : unavailable
               }
               alt={dato.title || dato.name}
               className="rounded-t-lg mx-auto h-full shadow-2xl hidden md:block"
@@ -264,7 +264,7 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
                   <Modal open={open} onClose={handleClose}>
                     <div className="w-fit h-fit my-20 mx-auto">
                       <iframe
-                      className="absolute left-[10%]"
+                        className="absolute left-[10%]"
                         width={"80%"}
                         height={"70%"}
                         src={`https://www.youtube.com/embed/${vid}`}

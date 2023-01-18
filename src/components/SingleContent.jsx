@@ -3,6 +3,7 @@ import ContentModal from "./ContentModal";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { unavailable } from "../config/config";
 const API_IMG = "https://image.tmdb.org/t/p/w300/";
 const noImage = "/public/images/noImagen.jpg";
 const SingleContent = ({
@@ -18,8 +19,9 @@ const SingleContent = ({
   const [puntuacion, setPuntuacion] = useState(vote_average);
 
   useEffect(() => {
-    setPuntuacion(vote_average - vote_average.toFixed(1));
-    console.log(vote_average - vote_average.toFixed(1));
+    if (vote_average) {
+      setPuntuacion(vote_average - vote_average.toFixed(1));
+    }
   }, [vote_average]);
 
   return (
@@ -70,7 +72,7 @@ const SingleContent = ({
           )}
 
           <img
-            src={poster ? API_IMG + poster : noImage}
+            src={poster ? API_IMG + poster : unavailable}
             alt={title}
             className="rounded-t-lg hover:opacity-60 "
           />
