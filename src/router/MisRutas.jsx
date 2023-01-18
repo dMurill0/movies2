@@ -43,7 +43,7 @@ const MisRutas = () => {
 
   return (
     <BrowserRouter>
-      <div className="w-fit max-w-[1490px]">
+      <div className="w-full ">
         <NavBar />
         <Routes>
           <Route

@@ -16,7 +16,7 @@ const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
       .catch((error) => console.log(error));
   }, []);
 
- // const [page, setPage] = useState();
+  // const [page, setPage] = useState();
 
   const [openModal, setOpenModal] = useState(false);
   const handleOpen = () => {
@@ -26,10 +26,9 @@ const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const handleClose = () => {
     setOpenModal(false);
   };
-  
 
   return (
-    <div className="max-w-fit w-fit h-fit bg-slate-500">
+    <div className=" w-fit h-fit bg-slate-500">
       <div className="p-5 flex-col flex-wrap justify-center  ">
         <Title
           titulo="Populares"
@@ -39,7 +38,7 @@ const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
           handleSwitch={handleSwitch}
         />
         {content.length > 0 ? (
-          <div className="flex flex-wrap mt-10 justify-around">
+          <div className="flex flex-wrap mt-10 justify-around w-screen  max-w-[1490px]">
             {content.map((c) => (
               // CAJA
               <NavLink to="/:media_type/:id" key={c.id}>
