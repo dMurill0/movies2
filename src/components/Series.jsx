@@ -56,7 +56,7 @@ const Series = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
         setPage={setPage}
       />
       {content.length > 0 ? (
-        <div className="flex flex-wrap mt-10 justify-around w-screen ">
+        <div className="flex flex-wrap mt-10 justify-around">
           {content.map((c) => (
             // CAJA
             <SingleContent

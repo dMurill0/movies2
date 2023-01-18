@@ -39,7 +39,7 @@ const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
           handleSwitch={handleSwitch}
         />
         {content.length > 0 ? (
-          <div className="flex flex-wrap mt-10 justify-around w-screen  ">
+          <div className="flex flex-wrap mt-10 justify-around">
             {content.map((c) => (
               // CAJA
               <NavLink to="/:media_type/:id" key={c.id}>
