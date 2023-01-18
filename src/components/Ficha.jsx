@@ -37,18 +37,19 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
     const { data } = await axios.get(API_VID);
     setVid(data.results[0]?.key);
   };
+  const [puntuacion, setPuntuacion] = useState(dato.vote_average);
 
-  // const fetchGenres = async () => {
-  //   const { data } = await axios.get(API_GENRES);
-  //   setCategoria(data.genres);
-  //   console.log("categorias " + categoria);
-  // };
   useEffect(() => {
     fetchId();
     fetchVideo();
+    if (dato.vote_average > 0) {
+      setPuntuacion(dato.vote_average - dato.vote_average.toFixed(1));
+      console.log(dato.vote_average - dato.vote_average.toFixed(1));
+    }
+
     // fetchGenres();
     fetchTime();
-  }, []);
+  }, [dato.vote_average]);
 
   const fetchTime = () => {
     setHoras(dato.runtime / 60);
@@ -189,6 +190,23 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
                 {/* IMDB */}
                 {!dato.vote_average ? (
                   ""
+                ) : puntuacion === 0 ? (
+                  <div className="flex w-1/3  justify-center items-center">
+                    <FaImdb color="yellow" className="text-4xl " />
+                    {dato.vote_average < 5 ? (
+                      <p className="px-2 bg-red-500 rounded-full text-sm">
+                        {dato.vote_average}
+                      </p>
+                    ) : dato.vote_average > 8 ? (
+                      <p className="px-2 bg-green-500 rounded-full text-sm">
+                        {dato.vote_average}
+                      </p>
+                    ) : (
+                      <p className="px-2 bg-blue-500 rounded-full text-sm">
+                        {dato.vote_average}
+                      </p>
+                    )}
+                  </div>
                 ) : (
                   <div className="flex w-1/3  justify-center items-center">
                     <FaImdb color="yellow" className="text-4xl " />
