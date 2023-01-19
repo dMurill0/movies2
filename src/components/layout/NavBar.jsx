@@ -17,7 +17,7 @@ const NavBar = () => {
 
   useEffect(() => {}, []);
 
-  return(
+  return (
     <div className="h-[90px] flex justify-around bg-gradient-to-b  from-black to-slate-800 dark:bg-gradient-to-b dark:from-purple-500 dark:to-pink-500 border-2 border-b-slate-300 dark:border-b-slate-800">
       <motion.div
         initial={{
@@ -102,7 +102,7 @@ const NavBar = () => {
                 if (event.keyCode === 13) {
                   document.getElementById("search").click();
                   setSearchText(event.target.value);
-                  navigate("/search/" + searchText);
+                  navigate("/search/" + event.target.value);
                 }
               });
           }}
