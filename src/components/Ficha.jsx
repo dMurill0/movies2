@@ -23,16 +23,21 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
   const [open, setOpen] = useState(false);
   const [minutos, setMinutos] = useState("");
   const [categoria, setCategoria] = useState([]);
-  const API_SRCH = `https://api.themoviedb.org/3/${media}/${identifier}?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES`;
-  const API_VID = `https://api.themoviedb.org/3/${media}/${identifier}/videos?api_key=1976c380dd1c386feb7c2778eef34284`;
-  const API_GENRES = `https://api.themoviedb.org/3/genre/${media}/list?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES`;
+  const API_SRCH = `https://api.themoviedb.org/3/${media}/${identifier}?api_key=${
+    import.meta.env.VITE_API_KEY
+  }&language=es-ES`;
+  const API_VID = `https://api.themoviedb.org/3/${media}/${identifier}/videos?api_key=${
+    import.meta.env.VITE_API_KEY
+  }`;
+  const API_GENRES = `https://api.themoviedb.org/3/genre/${media}/list?api_key=${
+    import.meta.env.VITE_API_KEY
+  }&language=es-ES`;
   const API_IMG = "https://image.tmdb.org/t/p/w300/";
   const noImage = "/images/noImagen.jpg";
   const history = useNavigate();
   const fetchId = async () => {
     const { data } = await axios.get(API_SRCH);
     setDato(data);
-    console.log(data);
   };
   const fetchVideo = async () => {
     const { data } = await axios.get(API_VID);
@@ -72,19 +77,14 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
         handleSwitch={handleSwitch}
       />
       {dato ? (
-        // <SingleContent
-        //   id={identifier}
-        //   poster={dato.poster_path}
-        //   title={dato.title || dato.name}
-        //   date={dato.first_air_date || dato.release_date}
-        //   media_type={dato.media_type}
-        // />
         <div className=" min-h-screen h-fit font-oswald md:mt-12 flex flex-wrap justify-center text-center mx-auto">
           {/* POSTER */}
           <div className="w-1/2 ">
             <img
               src={
-                dato.poster_path !== null ? API_IMG + dato.poster_path : unavailable
+                dato.poster_path !== null
+                  ? API_IMG + dato.poster_path
+                  : unavailable
               }
               alt={dato.title || dato.name}
               className="rounded-t-lg mx-auto h-full shadow-2xl hidden md:block"
@@ -96,30 +96,7 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
               <h1 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-oswald font-bold mx-auto truncate... uppercase">
                 {dato.title || dato.name}
               </h1>
-
-              {/* IMDB */}
-              {/* {!dato.vote_average ? (
-                ""
-              ) : (
-                <div className="flex flex-col w-1/3  justify-center items-center">
-                  <FaImdb color="yellow" className="text-4xl " />
-                  {dato.vote_average < 5 ? (
-                    <p className="px-2 bg-red-500 rounded-full text-sm">
-                      {dato.vote_average.toFixed(1)}
-                    </p>
-                  ) : dato.vote_average > 8 ? (
-                    <p className="px-2 bg-green-500 rounded-full text-sm">
-                      {dato.vote_average.toFixed(1)}
-                    </p>
-                  ) : (
-                    <p className="px-2 bg-blue-500 rounded-full text-sm">
-                      {dato.vote_average.toFixed(1)}
-                    </p>
-                  )}
-                </div>
-              )} */}
             </div>
-
             <div className="flex font-oswald w-full justify-evenly">
               <div className="flex space-x-2 items-center bg-slate-300 rounded-2xl p-2">
                 <BsCalendar3 />

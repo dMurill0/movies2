@@ -4,8 +4,9 @@ import Footer from "./layout/Footer";
 import SingleContent from "./SingleContent";
 import { NavLink } from "react-router-dom";
 const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
-  const API =
-    "https://api.themoviedb.org/3/trending/all/day?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES";
+  const API = `https://api.themoviedb.org/3/trending/all/day?api_key=${
+    import.meta.env.VITE_API_KEY
+  }&language=es-ES`;
   const API_IMG = "https://image.tmdb.org/t/p/w300/";
   const [content, setContent] = useState([]);
   const noImage = "/public/images/noImagen.jpg";
@@ -15,8 +16,6 @@ const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
       .then((data) => setContent(data.results))
       .catch((error) => console.log(error));
   }, []);
-
-  // const [page, setPage] = useState();
 
   const [openModal, setOpenModal] = useState(false);
   const handleOpen = () => {
@@ -52,7 +51,6 @@ const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
                 />
               </NavLink>
             ))}
-            {/* <CustomPagination /> */}
           </div>
         ) : (
           <h2></h2>

@@ -10,9 +10,10 @@ import SingleContent from "./SingleContent";
 import CustomPagination from "./layout/CustomPagination";
 import useGenre from "../hooks/useGenre";
 import Categorias from "./Categorias";
-const API_URL_TV =
-  "https://api.themoviedb.org/3/tv/popular?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES";
-const API_PAGINATION = `https://api.themoviedb.org/3/discover/tv?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page=2`;
+
+const API_PAGINATION = `https://api.themoviedb.org/3/discover/tv?api_key=${
+  import.meta.env.VITE_API_KEY
+}&language=es-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page=2`;
 const API_IMG = "https://image.tmdb.org/t/p/w300/";
 
 const Series = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
@@ -25,7 +26,9 @@ const Series = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const genreforURL = useGenre(selectedGenres);
   const fetchSeries = async () => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/discover/tv?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
+      `https://api.themoviedb.org/3/discover/tv?api_key=${
+        import.meta.env.VITE_API_KEY
+      }&language=es-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
     );
     setContent(data.results);
     setNumOfPages(data.total_pages);
