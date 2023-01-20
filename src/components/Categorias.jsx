@@ -27,9 +27,7 @@ function Categorias({
 
   const fetchGenres = async () => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/genre/${type}/list?api_key=${
-        import.meta.env.VITE_API_KEY
-      }&language=es-ES`
+      `https://api.themoviedb.org/3/genre/${type}/list?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES`
     );
     setGenres(data.genres);
     console.log(data.genres);

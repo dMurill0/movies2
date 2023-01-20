@@ -12,9 +12,7 @@ const Anime = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const [page, setPage] = useState(1);
   const [numOfPages, setNumOfPages] = useState();
   const fetchAnimes = async () => {
-    const { data } = await axios.get(`https://api.themoviedb.org/3/discover/tv?api_key=${
-      import.meta.env.VITE_API_KEY
-    }&language=es-ES&sort_by=popularity.desc&page=${page}&with_keywords=210024`);
+    const { data } = await axios.get(`https://api.themoviedb.org/3/discover/tv?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES&sort_by=popularity.desc&page=${page}&with_keywords=210024`);
     setContent(data.results);
     setNumOfPages(data.total_pages);
     console.log(data.results);

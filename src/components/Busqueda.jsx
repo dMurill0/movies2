@@ -6,9 +6,7 @@ import Title from "./layout/Title";
 import SingleContent from "./SingleContent";
 
 const Busqueda = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
-  const API_SRCH = `https://api.themoviedb.org/3/search/multi?api_key=${
-    import.meta.env.VITE_API_KEY
-  }&language=es-ES&query=`;
+  const API_SRCH = `https://api.themoviedb.org/3/search/multi?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES&query=`;
   const API_IMG = "https://image.tmdb.org/t/p/w300/";
   const { query } = useParams();
   const [content, setContent] = useState([]);
