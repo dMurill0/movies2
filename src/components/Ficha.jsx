@@ -19,6 +19,8 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
   const [media, setMedia] = useState(params.media_type);
   const [dato, setDato] = useState([]);
   const [vid, setVid] = useState([]);
+  const [actuado, setActuado] = useState([]);
+  const [dirigido, setDirigido] = useState([]);
   const [horas, setHoras] = useState("");
   const [open, setOpen] = useState(false);
   const [minutos, setMinutos] = useState("");
@@ -38,6 +40,17 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
   const fetchId = async () => {
     const { data } = await axios.get(API_SRCH);
     setDato(data);
+    console.log(identifier);
+    fetch(
+      `https://api.themoviedb.org/3/person/${identifier}/movie_credits?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES`
+    )
+      .then((res) => res.json())
+      .then((datos) => {
+        setActuado(datos.cast);
+        setDirigido(datos.crew);
+        console.log(datos);
+      });
+    console.log(data);
   };
   const fetchVideo = async () => {
     const { data } = await axios.get(API_VID);
@@ -80,15 +93,29 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
         <div className=" min-h-screen h-fit font-oswald md:mt-12 flex flex-wrap justify-center text-center mx-auto">
           {/* POSTER */}
           <div className="w-1/2 ">
-            <img
-              src={
-                dato.poster_path !== null
-                  ? API_IMG + dato.poster_path
-                  : unavailable
-              }
-              alt={dato.title || dato.name}
-              className="rounded-t-lg mx-auto h-full shadow-2xl hidden md:block"
-            />
+            {dato.profile_path && (
+              <div>
+                <img
+                  className="rounded-full mx-auto h-full shadow-2xl hidden md:block"
+                  src={
+                    dato.profile_path !== null
+                      ? API_IMG + dato.profile_path
+                      : unavailable
+                  }
+                />
+              </div>
+            )}
+            {dato.poster_path && (
+              <img
+                src={
+                  dato.poster_path !== null
+                    ? API_IMG + dato.poster_path
+                    : unavailable
+                }
+                alt={dato.title || dato.name}
+                className="rounded-t-lg mx-auto h-full shadow-2xl hidden md:block"
+              />
+            )}
           </div>
           {/* INFO */}
           <div className="w-full md:w-1/2 space-y-6">
@@ -97,20 +124,41 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
                 {dato.title || dato.name}
               </h1>
             </div>
+            <ul className="">
+                    {!actuado && actuado.map((ac) => {
+                      <li>Conocido por: {ac.original_title}</li>
+                    })}
+                  </ul>
             <div className="flex font-oswald w-full justify-evenly">
-              <div className="flex space-x-2 items-center bg-slate-300 rounded-2xl p-2">
+              <div className="flex space-x-2 items-center bg-slate-300 rounded-2xl text-xs p-2">
                 <BsCalendar3 />
-                {!dato.first_air_date && !dato.release_date ? (
+                {!dato.first_air_date &&
+                !dato.release_date &&
+                !dato.birthday ? (
                   ""
                 ) : (
                   <p className="truncate">
-                    {dato.first_air_date?.substr(0, 4) ||
-                      dato.release_date?.substr(0, 4)}
+                    {
+                      dato.first_air_date?.substr(0, 4) ||
+                        dato.release_date?.substr(0, 4) ||
+                        dato.birthday?.substr(0, 4)
+                      //   "-" +
+                      //   dato.deathday?.substr(0, 4)
+                    }
                   </p>
                 )}
               </div>
               <p>{dato.tagline}</p>
-              {media === "movie" ? (
+              <p className="flex space-x-2 items-center text-xs bg-slate-300 rounded-2xl p-2">
+                {dato.place_of_birth}
+              </p>
+              {dato.gender ? (
+                <span className="flex space-x-2 items-center text-xs bg-slate-300 rounded-2xl p-2">
+                  {dato.known_for_department === "Acting"
+                    ? "Actor"
+                    : "Director"}
+                </span>
+              ) : media === "movie" ? (
                 // <p>{dato.production_countries[0].name}</p>
                 <span className="text-xs w-6 h-5">
                   {dato.original_language === "en" ? (
@@ -216,50 +264,61 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
                   ))}
               </div>
               {/* SINOPSIS, RESUMEN */}
-              {!dato.overview ? (
-                <h3 className="p-4 rounded-lg font-oswald bg-slate-100 w-2/3 mx-auto">
-                  No hay información
-                </h3>
+              <div className="first-letter:ml-10">
+                {dato.biography ? (
+                  <h3 className="p-4 rounded-lg text-sm font-oswald bg-slate-100 w-2/3 mx-auto h-[250px] overflow-y-scroll">
+                    {dato.biography}
+                  </h3>
+                ) : !dato.overview ? (
+                  <h3 className="p-4 rounded-lg font-oswald bg-slate-100 w-2/3 mx-auto">
+                    No hay información
+                  </h3>
+                ) : (
+                  <h3 className="p-4 rounded-lg text-sm font-oswald bg-slate-100 w-2/3 mx-auto">
+                    {dato.overview}
+                  </h3>
+                )}
+              </div>
+              {dato.biography ? (
+                ""
               ) : (
-                <h3 className="p-4 rounded-lg text-sm font-oswald bg-slate-100 w-2/3 mx-auto">
-                  {dato.overview}
-                </h3>
+                <div className="flex justify-around">
+                  <div className="flex-col justify-center">
+                    <p>Trailer</p>
+                    <a onClick={handleOpen} target="_blank">
+                      <BsYoutube
+                        color="red"
+                        className="text-4xl cursor-pointer"
+                        size="40px"
+                      />
+                    </a>
+                  </div>
+                  {open && (
+                    <Modal open={open} onClose={handleClose}>
+                      <div className="w-fit h-fit my-20 mx-auto">
+                        <iframe
+                          className="absolute left-[10%]"
+                          width={"80%"}
+                          height={"70%"}
+                          src={`https://www.youtube.com/embed/${vid}`}
+                        ></iframe>
+                      </div>
+                    </Modal>
+                  )}
+
+                  <div className="flex flex-col items-center justify-center">
+                    <p>Página Web</p>
+                    <a href={dato.homepage} target="_blank">
+                      <BiWorld
+                        color="white"
+                        className="text-4xl cursor-pointer"
+                      />
+                    </a>
+                  </div>
+                 
+                </div>
               )}
 
-              <div className="flex justify-around">
-                <div className="flex-col justify-center">
-                  <p>Trailer</p>
-                  <a onClick={handleOpen} target="_blank">
-                    <BsYoutube
-                      color="red"
-                      className="text-4xl cursor-pointer"
-                      size="40px"
-                    />
-                  </a>
-                </div>
-                {open && (
-                  <Modal open={open} onClose={handleClose}>
-                    <div className="w-fit h-fit my-20 mx-auto">
-                      <iframe
-                        className="absolute left-[10%]"
-                        width={"80%"}
-                        height={"70%"}
-                        src={`https://www.youtube.com/embed/${vid}`}
-                      ></iframe>
-                    </div>
-                  </Modal>
-                )}
-
-                <div className="flex flex-col items-center justify-center">
-                  <p>Página Web</p>
-                  <a href={dato.homepage} target="_blank">
-                    <BiWorld
-                      color="white"
-                      className="text-4xl cursor-pointer"
-                    />
-                  </a>
-                </div>
-              </div>
               <button
                 onClick={() => {
                   history(-1);

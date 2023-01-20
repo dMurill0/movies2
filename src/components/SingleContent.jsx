@@ -14,6 +14,8 @@ const SingleContent = ({
   media_type,
   vote_average,
   language,
+  gender,
+  known
 }) => {
   const [media, setMedia] = useState(media_type);
   const [puntuacion, setPuntuacion] = useState(vote_average);
@@ -43,7 +45,27 @@ const SingleContent = ({
           }}
           className="cursor-pointer flex flex-col w-[300px] bg-slate-800 text-white hover:text-black dark:bg-slate-300 p-2 mt-4 rounded-lg relative hover:bg-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:text-black"
         >
-          {!vote_average ? (
+          {media === "person" ? (
+            <div>
+              <img
+                src={poster ? API_IMG + poster : unavailable}
+                alt={title}
+                className="rounded-full hover:opacity-60 "
+              />
+              <h1 className="text-xl font-oswald text-center truncate">
+                  {title}
+                </h1>
+              <div className="flex justify-between">
+                <span className="text-xs font-oswald">
+                  {gender === 1 ? "Mujer" : "Hombre"}
+                </span>
+                <span className="text-xs font-oswald">
+                  {known === "Acting" ? "Actor" : "Director"}
+                </span>
+                
+              </div>
+            </div>
+          ) : !vote_average ? (
             ""
           ) : puntuacion === 0 ? (
             <Badge
