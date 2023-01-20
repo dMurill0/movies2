@@ -13,6 +13,7 @@ const Populares = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
       .then((res) => res.json())
       .then((data) => setContent(data.results))
       .catch((error) => console.log(error));
+      
   }, []);
 
   const [openModal, setOpenModal] = useState(false);

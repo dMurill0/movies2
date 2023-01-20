@@ -15,7 +15,7 @@ const API_PAGINATION = `https://api.themoviedb.org/3/discover/tv?api_key=${
   import.meta.env.VITE_API_KEY
 }&language=es-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page=2`;
 const API_IMG = "https://image.tmdb.org/t/p/w300/";
-
+const KEY = import.meta.env.VITE_API_KEY;
 const Series = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const [content, setContent] = useState([]);
   const [page, setPage] = useState(1);
@@ -26,9 +26,7 @@ const Series = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const genreforURL = useGenre(selectedGenres);
   const fetchSeries = async () => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/discover/tv?api_key=${
-        import.meta.env.VITE_API_KEY
-      }&language=es-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
+      `https://api.themoviedb.org/3/discover/tv?api_key=${KEY}&language=es-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
     );
     setContent(data.results);
     setNumOfPages(data.total_pages);

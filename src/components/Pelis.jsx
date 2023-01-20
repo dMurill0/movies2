@@ -11,7 +11,7 @@ import useGenre from "../hooks/useGenre";
 const API_URL =
   "https://api.themoviedb.org/3/movie/popular?api_key=1976c380dd1c386feb7c2778eef34284&language=es&ES";
 const API_IMG = "https://image.tmdb.org/t/p/w300/";
-
+const KEY = import.meta.env.VITE_API_KEY;
 const Pelis = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const [content, setContent] = useState([]);
   const [genres, setGenres] = useState([]);
@@ -22,9 +22,7 @@ const Pelis = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
   const genreforURL = useGenre(selectedGenres);
   const fetchMovies = async () => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${
-        import.meta.env.VITE_API_KEY
-      }&language=es-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${KEY}&language=es-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
     );
     setContent(data.results);
     setNumOfPages(data.total_pages);
