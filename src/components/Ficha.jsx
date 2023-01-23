@@ -141,7 +141,10 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
                 <span onClick={handleFilms} className="pointer truncate">
                   Todas sus peliculas
                 </span>
-                <div className="flex-col overflow-y-scroll w-full h-full bg-slate-700 truncate text-white" id="actuadas">
+                <div
+                  className="flex-col overflow-y-scroll w-full h-full bg-slate-700 truncate text-white"
+                  id="actuadas"
+                >
                   {actuado.length > 0 &&
                     actuado.map((ac) => {
                       console.log(ac.title);
@@ -162,7 +165,10 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
                   {dirigido &&
                     dirigido.map((di) => {
                       console.log(di.title);
-                      <li key={di.id} className="bg-slate-700 text-white underline">
+                      <li
+                        key={di.id}
+                        className="bg-slate-700 text-white underline"
+                      >
                         {di.title}
                       </li>;
                     })}
@@ -236,9 +242,10 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
             </div>
 
             <div className="flex flex-col justify-center space-y-4">
-              {dato.networks && (
+              {dato.networks && dato.networks.length > 0 && (
                 <span className="flex items-center justify-center">
-                  {dato.networks[0].name === "Netflix" ? (
+                  console.log(dato.networks)
+                  {dato && dato.networks[0].name === "Netflix" ? (
                     <RiNetflixFill color="red" className="text-3xl" />
                   ) : dato.networks[0].name === "Amazon" ? (
                     <SiPrimevideo className="text-3xl" />
