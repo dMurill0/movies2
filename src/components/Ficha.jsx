@@ -21,35 +21,21 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
   const [vid, setVid] = useState([]);
   const [actuado, setActuado] = useState([]);
   const [dirigido, setDirigido] = useState([]);
+  const [known, setKnown] = useState([]);
   const [horas, setHoras] = useState("");
   const [open, setOpen] = useState(false);
   const [minutos, setMinutos] = useState("");
   const [categoria, setCategoria] = useState([]);
-  const API_SRCH = `https://api.themoviedb.org/3/${media}/${identifier}?api_key=${
-    import.meta.env.VITE_API_KEY
-  }&language=es-ES`;
-  const API_VID = `https://api.themoviedb.org/3/${media}/${identifier}/videos?api_key=${
-    import.meta.env.VITE_API_KEY
-  }`;
-  const API_GENRES = `https://api.themoviedb.org/3/genre/${media}/list?api_key=${
-    import.meta.env.VITE_API_KEY
-  }&language=es-ES`;
+  const API_SRCH = `https://api.themoviedb.org/3/${media}/${identifier}?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES`;
+  const API_VID = `https://api.themoviedb.org/3/${media}/${identifier}/videos?api_key=1976c380dd1c386feb7c2778eef34284`;
+  const API_GENRES = `https://api.themoviedb.org/3/genre/${media}/list?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES`;
   const API_IMG = "https://image.tmdb.org/t/p/w300/";
   const noImage = "/images/noImagen.jpg";
   const history = useNavigate();
   const fetchId = async () => {
     const { data } = await axios.get(API_SRCH);
     setDato(data);
-    console.log(identifier);
-    fetch(
-      `https://api.themoviedb.org/3/person/${identifier}/movie_credits?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES`
-    )
-      .then((res) => res.json())
-      .then((datos) => {
-        setActuado(datos.cast);
-        setDirigido(datos.crew);
-        console.log(datos);
-      });
+    console.log("dato es", data);
     console.log(data);
   };
   const fetchVideo = async () => {
@@ -61,6 +47,9 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
   useEffect(() => {
     fetchId();
     fetchVideo();
+    var know = JSON.parse(localStorage.getItem("knownFor"));
+    console.log("el localstorage en ficha es: ", know);
+    setKnown(know);
     if (dato.vote_average > 0) {
       setPuntuacion(dato.vote_average - dato.vote_average.toFixed(1));
     }
@@ -80,6 +69,35 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
   const handleClose = () => {
     setOpen(false);
   };
+  function handleFilms() {
+    fetch(
+      `https://api.themoviedb.org/3/person/${identifier}/movie_credits?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES`
+    )
+      .then((res) => res.json())
+      .then((datos) => {
+        setActuado(datos.cast);
+        let dir = document.getElementById("actuadas");
+        if (dir.style.display === "block") dir.style.display = "none";
+        else dir.style.display = "block";
+        console.log("aver esas pelis que yo las vea");
+        console.log("protagonizadas", datos.cast);
+      });
+  }
+
+  function handleDirector() {
+    fetch(
+      `https://api.themoviedb.org/3/person/${identifier}/movie_credits?api_key=1976c380dd1c386feb7c2778eef34284&language=es-ES`
+    )
+      .then((res) => res.json())
+      .then((datos) => {
+        setDirigido(datos.crew);
+        let dir = document.getElementById("dirigidas");
+        if (dir.style.display === "block") dir.style.display = "none";
+        else dir.style.display = "block";
+        console.log("dirigidas", datos.crew);
+      });
+  }
+
   return (
     <div className="h-fit w-screen bg-slate-500 dark:bg-slate-300 p-6 font-oswald">
       <Title
@@ -117,6 +135,42 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
               />
             )}
           </div>
+          {media === "person" && (
+            <div className="flex space-x-4 bg-slate-400 ">
+              <div className="flex-col w-1/2">
+                <span onClick={handleFilms} className="pointer truncate">
+                  Todas sus peliculas
+                </span>
+                <div className="flex-col overflow-y-scroll w-full h-full bg-slate-700 truncate text-white" id="actuadas">
+                  {actuado.length > 0 &&
+                    actuado.map((ac) => {
+                      console.log(ac.title);
+                      <li key={ac.id} className="">
+                        {ac.title}
+                      </li>;
+                    })}
+                </div>
+              </div>
+              <div className="flex-col w-1/2">
+                <span className="pointer truncate..." onClick={handleDirector}>
+                  Todas sus peliculas como director/a
+                </span>
+                <div
+                  className="flex-col overflow-y-scroll w-full h-full bg-slate-700 truncate text-white"
+                  id="dirigidas"
+                >
+                  {dirigido &&
+                    dirigido.map((di) => {
+                      console.log(di.title);
+                      <li key={di.id} className="bg-slate-700 text-white underline">
+                        {di.title}
+                      </li>;
+                    })}
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* INFO */}
           <div className="w-full md:w-1/2 space-y-6">
             <div className="flex justify-between">
@@ -124,11 +178,12 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
                 {dato.title || dato.name}
               </h1>
             </div>
-            <ul className="">
-                    {!actuado && actuado.map((ac) => {
-                      <li>Conocido por: {ac.original_title}</li>
-                    })}
-                  </ul>
+            {/* <ul className="w-1/2 h-1/2 bg-stone-500">
+              {actuado &&
+                actuado.map((ac) => {
+                  <li>Conocido por: {ac.original_title}</li>;
+                })}
+            </ul> */}
             <div className="flex font-oswald w-full justify-evenly">
               <div className="flex space-x-2 items-center bg-slate-300 rounded-2xl text-xs p-2">
                 <BsCalendar3 />
@@ -149,9 +204,9 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
                 )}
               </div>
               <p>{dato.tagline}</p>
-              <p className="flex space-x-2 items-center text-xs bg-slate-300 rounded-2xl p-2">
+              {/* <p className="flex space-x-2 items-center text-xs bg-slate-300 rounded-2xl p-2">
                 {dato.place_of_birth}
-              </p>
+              </p> */}
               {dato.gender ? (
                 <span className="flex space-x-2 items-center text-xs bg-slate-300 rounded-2xl p-2">
                   {dato.known_for_department === "Acting"
@@ -315,7 +370,6 @@ const Ficha = ({ id, theme, cursorDark, cursorLight, handleSwitch }) => {
                       />
                     </a>
                   </div>
-                 
                 </div>
               )}
 

@@ -43,6 +43,7 @@ const Busqueda = ({ theme, cursorDark, cursorLight, handleSwitch }) => {
               vote_average={c.vote_average}
               gender={c.gender}
               known={c.known_for_department}
+              knowFor={c.known_for}
             />
           ))}
           {/* <CustomPagination /> */}
